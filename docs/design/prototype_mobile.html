@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#ffffff">
+<title>전세 사건 AI 법률심리</title>
+<style>
+:root{
+  --ink:#1a1d21; --ink2:#4a5057; --ink3:#7b838c;
+  --line:#e3e6ea; --line2:#eef0f3;
+  --bg:#ffffff; --card:#ffffff;
+  --brand:#1f3a5f; --brand2:#2d5586; --brandsoft:#eef3f9;
+  --green:#0f7b4f; --greensoft:#e8f5ee; --greenline:#b8dfc9;
+  --amber:#a86500; --ambersoft:#fdf3e0; --amberline:#f0d9a8;
+  --red:#b02a1e; --redsoft:#fdeceb; --redline:#f3c4bf;
+  --radius:14px;
+  --top:calc(52px + env(safe-area-inset-top,0px));
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Malgun Gothic',sans-serif;
+  font-size:16px; line-height:1.62; -webkit-font-smoothing:antialiased;
+  padding-top:var(--top);
+  padding-bottom:calc(84px + env(safe-area-inset-bottom,0px));
+  overscroll-behavior-y:none;
+}
+button{touch-action:manipulation;font-family:inherit}
+
+/* ── 고정 상단바 ── */
+.topbar{
+  position:fixed; top:0; left:0; right:0; z-index:60;
+  background:rgba(255,255,255,.96); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  padding:env(safe-area-inset-top,0px) 14px 0;
+  height:var(--top);
+  display:flex; align-items:center; gap:10px;
+}
+.topbar .back{
+  width:34px;height:34px;border:none;background:none;font-size:20px;color:var(--brand);
+  cursor:pointer;padding:0;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+}
+.topbar .back[hidden]{display:none}
+.topbar .t{font-size:15px;font-weight:700;letter-spacing:-.3px;flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.topbar .step{font-size:12px;color:var(--ink3);font-variant-numeric:tabular-nums;flex:0 0 auto}
+
+/* ── 본문 ── */
+main{padding:18px 16px 30px;max-width:560px;margin:0 auto}
+
+h2.sh{font-size:23px;margin:0 0 10px;letter-spacing:-.6px;line-height:1.36}
+h3.ss{font-size:16px;margin:26px 0 10px;letter-spacing:-.3px}
+p.body{font-size:15.5px;color:var(--ink2);margin:0 0 14px}
+p.small{font-size:13.5px;color:var(--ink3);margin:0 0 12px;line-height:1.6}
+.center{text-align:center}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.tier{border-radius:var(--radius);padding:15px 16px;margin-bottom:11px;font-size:15px;line-height:1.62}
+.tier .lb{font-size:12.5px;font-weight:800;margin-bottom:8px;display:block}
+.t-green{background:var(--greensoft);border:1px solid var(--greenline)}
+.t-green .lb{color:var(--green)}
+.t-amber{background:var(--ambersoft);border:1px solid var(--amberline)}
+.t-amber .lb{color:var(--amber)}
+.t-red{background:var(--redsoft);border:1px solid var(--redline)}
+.t-red .lb{color:var(--red)}
+.quote{
+  font-size:14.5px;color:var(--ink2);background:rgba(255,255,255,.75);
+  border-left:3px solid rgba(0,0,0,.13);padding:11px 13px;border-radius:0 8px 8px 0;margin:10px 0;line-height:1.66;
+}
+.srclink{display:inline-block;font-size:14px;color:var(--brand2);font-weight:600;margin-top:9px;
+  text-decoration:none;border-bottom:1px solid #c3d3e5;padding:4px 0;min-height:30px}
+.verified{font-size:13px;color:var(--green);font-weight:700;margin-top:8px;display:block}
+
+.why{background:var(--brandsoft);border:1px solid #d5e2f0;border-radius:12px;
+  padding:14px;font-size:14.5px;color:#2c4a70;margin-top:18px;line-height:1.62}
+.why b{display:block;margin-bottom:5px;font-size:14px;color:var(--brand)}
+
+.notice{background:#f7f8fa;border:1px solid var(--line);border-radius:12px;
+  padding:14px;font-size:13.5px;color:var(--ink3);line-height:1.65;margin:14px 0}
+.notice b{color:var(--ink2)}
+.ailabel{display:inline-flex;align-items:center;gap:5px;background:#f0f2f5;border:1px solid var(--line);
+  color:var(--ink3);font-size:12.5px;font-weight:700;padding:5px 11px;border-radius:20px;margin-bottom:14px}
+
+/* ── 버튼 (탭 타깃 최소 48px) ── */
+.btn{display:block;width:100%;min-height:52px;padding:15px;border-radius:13px;border:none;cursor:pointer;
+  font-size:17px;font-weight:700;margin-top:11px;letter-spacing:-.3px;background:var(--brand);color:#fff}
+.btn:active{filter:brightness(1.2)}
+.btn.ghost{background:#fff;color:var(--brand);border:1.5px solid #cdd8e5}
+.btn.quiet{background:#f2f4f6;color:var(--ink2);font-size:15px;font-weight:600}
+.btn.danger{background:var(--red)}
+.linkrow{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:50px;
+  background:none;border:none;padding:13px 0;font-size:15px;color:var(--brand2);font-weight:600;
+  cursor:pointer;border-bottom:1px solid var(--line2);text-align:left;gap:10px}
+
+.choice{display:flex;align-items:center;gap:13px;width:100%;min-height:56px;background:#fff;
+  border:1.5px solid var(--line);border-radius:13px;padding:15px 16px;margin-bottom:10px;
+  font-size:16px;color:var(--ink);cursor:pointer;text-align:left}
+.choice:active{background:#f4f6f8}
+.choice.on{border-color:var(--brand);border-width:2px;background:var(--brandsoft);font-weight:700}
+.dot{width:20px;height:20px;border-radius:50%;border:2px solid #c3c9d0;flex:0 0 auto}
+.choice.on .dot{border-color:var(--brand);border-width:6px}
+
+.prog{margin-bottom:18px}
+.progtop{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink3);
+  margin-bottom:7px;font-variant-numeric:tabular-nums}
+.progbar{height:6px;background:#e9ecef;border-radius:3px;overflow:hidden}
+.progfill{height:100%;background:var(--brand);border-radius:3px}
+.gauge{height:11px;background:#e9ecef;border-radius:6px;overflow:hidden;margin:10px 0 8px}
+.gaugefill{height:100%;background:var(--green);border-radius:6px}
+
+.facts{width:100%;border-collapse:collapse;font-size:14.5px}
+.facts td{padding:9px 0;border-bottom:1px solid var(--line2);vertical-align:top}
+.facts td:first-child{color:var(--ink3);width:44%}
+.facts td:last-child{text-align:right;font-weight:600}
+.facts tr:last-child td{border-bottom:none}
+
+.tl{position:relative;padding-left:22px;margin-top:8px}
+.tl::before{content:'';position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.tlitem{position:relative;padding-bottom:18px;font-size:14.5px}
+.tlitem::before{content:'';position:absolute;left:-21px;top:6px;width:10px;height:10px;
+  border-radius:50%;background:#c3c9d0;border:2px solid #fff}
+.tlitem.now::before{background:var(--red);width:12px;height:12px;left:-22px}
+.tld{font-size:12.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.tlt{font-weight:600;margin-top:1px}
+
+.todo{display:flex;gap:13px;align-items:flex-start;padding:15px 0;border-bottom:1px solid var(--line2)}
+.chk{width:26px;height:26px;border:2px solid #c3c9d0;border-radius:7px;flex:0 0 auto;
+  cursor:pointer;position:relative}
+.chk.on{background:var(--brand);border-color:var(--brand)}
+.chk.on::after{content:'✓';position:absolute;top:-2px;left:5px;color:#fff;font-size:17px;font-weight:800}
+.todot{font-size:16px;font-weight:600}
+.todos{font-size:13.5px;color:var(--ink3);margin-top:2px}
+
+.opt{width:100%;background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);
+  padding:18px;margin-bottom:12px;cursor:pointer;text-align:left}
+.opt:active{background:#f7f9fb}
+.opt.primary{border-color:#bcd0e6;background:linear-gradient(180deg,#f8fbff 0%,#fff 100%)}
+.optt{font-size:18px;font-weight:700;margin-bottom:6px;letter-spacing:-.4px}
+.optd{font-size:14.5px;color:var(--ink2);line-height:1.55}
+.optgo{font-size:14px;color:var(--brand2);font-weight:700;margin-top:11px;display:block}
+
+.stepbox{border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;background:#fff}
+.stephd{background:#f7f8fa;padding:13px 15px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.stepn{background:var(--brand);color:#fff;font-size:12px;font-weight:800;padding:3px 10px;border-radius:20px}
+.stept{font-size:16px;font-weight:700;letter-spacing:-.3px}
+.stepbd{padding:15px}
+
+.ev{width:100%;border-collapse:collapse;font-size:14.5px}
+.ev th{text-align:left;font-size:12.5px;color:var(--ink3);font-weight:600;padding:0 0 8px;border-bottom:1px solid var(--line)}
+.ev td{padding:11px 0;border-bottom:1px solid var(--line2)}
+.ev td:nth-child(2),.ev td:nth-child(3){text-align:center;width:56px}
+
+.formmock{border:2px dashed #c8ced6;border-radius:12px;padding:15px;background:#fafbfc;font-size:14px}
+.frow{display:flex;gap:9px;align-items:center;margin-bottom:10px}
+.flab{color:var(--ink3);flex:0 0 92px;font-size:13px}
+.fbox{flex:1;height:34px;background:#fff;border:1px solid var(--line);border-radius:7px}
+
+.costbox{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:12px}
+.costhd{background:#f7f8fa;padding:12px 15px;font-size:14px;font-weight:700;border-bottom:1px solid var(--line)}
+.costrow{display:flex;justify-content:space-between;gap:10px;padding:12px 15px;font-size:15px;border-bottom:1px solid var(--line2)}
+.costrow:last-child{border-bottom:none}
+.costrow.total{background:#fafbfc;font-weight:800;color:var(--brand)}
+.costrow .n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.empty{border:2px dashed #c8ced6;border-radius:var(--radius);padding:26px 18px;text-align:center;
+  background:#fafbfc;color:var(--ink3);font-size:14.5px;line-height:1.68}
+
+.vs{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px;margin-bottom:11px;font-size:15px}
+.vshd{font-size:14px;font-weight:800;color:var(--ink3);margin-bottom:8px}
+.claim{font-size:16px;font-weight:700;margin-bottom:9px;letter-spacing:-.3px}
+.tag{display:inline-block;font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:20px;margin-bottom:9px}
+.tag.said{background:var(--ambersoft);color:var(--amber);border:1px solid var(--amberline)}
+.tag.notyet{background:#f0f2f5;color:var(--ink3);border:1px solid var(--line)}
+.fact{font-size:14.5px;color:var(--ink2);padding:4px 0}
+
+.checkline{display:flex;justify-content:space-between;gap:10px;font-size:15px;padding:11px 0;border-bottom:1px solid var(--line2)}
+.checkline:last-child{border-bottom:none}
+.ok{color:var(--green);font-weight:700}
+
+.risk{border-radius:var(--radius);padding:17px;margin-bottom:14px}
+.risk.amber{background:var(--ambersoft);border:1px solid var(--amberline)}
+.risk.red{background:var(--redsoft);border:1px solid var(--redline)}
+.riskt{font-size:18px;font-weight:800;margin-bottom:8px}
+.risk.amber .riskt{color:var(--amber)}
+.risk.red .riskt{color:var(--red)}
+
+.casecard{background:linear-gradient(135deg,#1f3a5f 0%,#2d5586 100%);color:#fff;
+  border-radius:var(--radius);padding:19px;margin-bottom:14px}
+.casecard .cn{font-size:19px;font-weight:800;margin-bottom:4px;letter-spacing:-.4px}
+.casecard .cm{font-size:14.5px;opacity:.84;margin-bottom:15px}
+.casecard .pb{height:7px;background:rgba(255,255,255,.24);border-radius:4px;overflow:hidden}
+.casecard .pf{height:100%;background:#fff;border-radius:4px}
+.casecard .pl{font-size:13px;opacity:.86;margin-top:7px;display:flex;justify-content:space-between}
+
+.pill{display:inline-block;background:#f0f2f5;border:1px solid var(--line);border-radius:6px;
+  padding:2px 9px;font-size:13px;color:var(--ink2);font-weight:600}
+
+/* ── 하단 도구바 ── */
+.dock{
+  position:fixed; left:0; right:0; bottom:0; z-index:60;
+  background:rgba(255,255,255,.97); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);
+  padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));
+  display:flex; gap:8px;
+}
+.dock button{
+  flex:1; min-height:46px; border:1px solid var(--line); background:#f7f8fa; border-radius:11px;
+  font-size:14px; font-weight:700; color:var(--ink2); cursor:pointer;
+}
+.dock button.on{background:var(--brand);border-color:var(--brand);color:#fff}
+
+/* ── 시트 ── */
+.sheet{
+  position:fixed; left:0; right:0; bottom:0; z-index:70;
+  background:#fff; border-radius:20px 20px 0 0; box-shadow:0 -6px 34px rgba(0,0,0,.2);
+  max-height:76vh; overflow-y:auto; -webkit-overflow-scrolling:touch;
+  transform:translateY(102%); transition:transform .26s cubic-bezier(.32,.72,0,1);
+  padding:0 16px calc(24px + env(safe-area-inset-bottom,0px));
+}
+.sheet.open{transform:translateY(0)}
+.sheethd{position:sticky;top:0;background:#fff;padding:14px 0 12px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:10px;z-index:2}
+.grab{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:38px;height:4px;background:#d5d9de;border-radius:3px}
+.sheethd h3{margin:0;font-size:16px;flex:1;letter-spacing:-.3px}
+.sheethd .x{width:34px;height:34px;border:none;background:#f2f4f6;border-radius:50%;font-size:17px;color:var(--ink3);cursor:pointer}
+.sheetbd{padding:14px 0;font-size:14.5px;color:var(--ink2);line-height:1.72}
+.sheetbd b{color:var(--ink)}
+.sheetbd ul{margin:10px 0 0;padding-left:19px}
+.sheetbd li{margin-bottom:9px}
+.navlist{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px 0}
+.navlist button{min-height:54px;background:#f7f8fa;border:1px solid var(--line);border-radius:11px;
+  padding:9px 11px;font-size:13.5px;color:var(--ink2);cursor:pointer;text-align:left;line-height:1.35}
+.navlist button.on{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:700}
+.navlist .k{display:block;font-size:11.5px;opacity:.72;font-weight:700;margin-bottom:2px}
+.scrim{position:fixed;inset:0;background:rgba(15,20,28,.42);z-index:65;opacity:0;pointer-events:none;transition:opacity .26s}
+.scrim.on{opacity:1;pointer-events:auto}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <button class="back" id="back" onclick="goBack()" hidden>‹</button>
+  <span class="t" id="barTitle">전세금 사건</span>
+  <span class="step" id="barStep"></span>
+</header>
+
+<main id="screen"></main>
+
+<div class="scrim" id="scrim" onclick="closeSheets()"></div>
+
+<div class="sheet" id="navSheet">
+  <div class="sheethd"><span class="grab"></span><h3>화면 바로가기</h3>
+    <button class="x" onclick="closeSheets()">✕</button></div>
+  <div class="navlist" id="navlist"></div>
+</div>
+
+<div class="sheet" id="noteSheet">
+  <div class="sheethd"><span class="grab"></span><h3 id="noteTitle">설계 의도</h3>
+    <button class="x" onclick="closeSheets()">✕</button></div>
+  <div class="sheetbd" id="noteBody"></div>
+</div>
+
+<nav class="dock">
+  <button id="dNav" onclick="openSheet('navSheet')">☰ 화면 목록</button>
+  <button id="dNote" onclick="openSheet('noteSheet')">💡 설계 의도</button>
+</nav>
+
+<script>
+var state = { todo:[false,false,false] };
+var S = {};
+
+/* ── S0 ── */
+S.s0 = { bar:'전세금 사건', step:'', nav:'S0', navlabel:'진입·고지',
+note:'<b>AI기본법 제31조 제1항</b>의 사전 고지를 하단 회색 작은 글씨가 아니라 <b>첫 화면 본문</b>에 넣었습니다.<ul><li>"승소 가능성은 안내하지 않습니다"를 기능 소개 자리에 배치 — 못 하는 걸 숨기지 않고 특징으로 내세움</li><li>다루는 범위를 처음부터 명시해 범위 밖 사용자의 이탈을 유도 (좋은 이탈)</li><li>"이미 만든 사건이 있어요"가 재방문 진입점 — 이게 GPT에 없는 것</li></ul>',
+html:`
+<div style="text-align:center;padding:22px 0 10px">
+  <div style="font-size:60px;line-height:1">⚖️</div>
+  <h2 class="sh" style="margin-top:18px">전세금, 못 받으셨나요</h2>
+  <p class="body">지금부터 무엇을 해야 하는지<br>하나씩 정리해 드립니다.</p>
+</div>
+<div class="card" style="background:#f7f8fa">
+  <div style="font-size:15px;font-weight:800;margin-bottom:10px">🤖 이 서비스는 AI를 사용합니다</div>
+  <div style="font-size:14.5px;color:var(--ink2);line-height:1.8">
+    · 법률 상담이 아니라 <b>정보 정리 도구</b>입니다<br>
+    · 모든 법률 정보에 <b>법령 원문 링크</b>를 붙입니다<br>
+    · 확인되지 않은 것은 <b>"모른다"고 표시</b>합니다<br>
+    · <b>승소 가능성은 안내하지 않습니다</b>
+  </div>
+</div>
+<div class="tier t-green">
+  <span class="lb">현재 다루는 사건</span>
+  🏠 주택 전세 · 보증부월세<br><b>계약 종료 후 보증금 미반환</b>
+  <div style="font-size:13.5px;color:var(--ink3);margin-top:9px">그 외 사건은 아직 다루지 않습니다</div>
+</div>
+<button class="btn" onclick="go('s1')">시작하기</button>
+<button class="btn quiet" onclick="go('s12')">이미 만든 사건이 있어요 →</button>` };
+
+/* ── S1 ── */
+S.s1 = { bar:'사건 진술', step:'1 / 6', nav:'S1', navlabel:'사건 진술',
+note:'<b>🎤 음성 입력이 접근성의 핵심입니다.</b> 긴 글을 타이핑하기 어려운 고령·저학력 사용자가 주 타깃이라면 없으면 안 되는 기능입니다.<ul><li>개인정보 마스킹 고지를 <b>입력창 바로 아래</b> 배치 — 제출 전에 봐야 의미가 있음</li><li>내부 처리: 개인정보 마스킹 → 하드스톱 키워드 스캔(고소·사기·경찰·소장·경매·상속) → 사건 유형 분류</li></ul>',
+html:`
+<h2 class="sh">무슨 일이 있었는지<br>편하게 말씀해 주세요</h2>
+<p class="body">법률 용어를 쓰지 않으셔도 됩니다.</p>
+<div class="card" style="min-height:150px;font-size:15.5px;color:var(--ink2);line-height:1.72">
+  작년에 전세 5천만원으로 들어갔는데 계약이 6월에 끝났어요. 집주인이 새 세입자 구하면 준다고만 하고 두 달째 안 줍니다.
+</div>
+<div style="display:flex;gap:9px;margin:12px 0">
+  <button class="btn quiet" style="margin:0">🎤 말로 하기</button>
+  <button class="btn quiet" style="margin:0">📷 사진 첨부</button>
+</div>
+<div class="notice">🔒 <b>이름·주소·연락처는 자동으로 가려서</b> 처리합니다.<br>상담 내용은 AI 학습에 사용하지 않습니다.</div>
+<button class="btn" onclick="go('s2a')">다음</button>` };
+
+/* ── 인터뷰 공통 ── */
+function qs(n,score,q,opts,why,next){
+  return { bar:'사실관계 확인', step:'Q'+n+' / 17', nav:'S2', navlabel:'사실관계 심리',
+  note:'<b>"💡 왜 묻나요?"가 이 제품의 승부처입니다.</b> GPT는 답을 주지만 사용자는 <i>왜 그게 중요한지</i> 모른 채 지나갑니다. 질문마다 이유를 붙이면, 인터뷰가 끝났을 때 사용자는 <b>자기 사건을 이해하게</b> 됩니다.<ul><li><b>판단가능성 게이지</b>가 "질문이 왜 이렇게 많아" 이탈을 막습니다</li><li>필수 9문항 × 2점 + 추가 6문항 × 1점 = 24점 → 15점 스케일 정규화</li><li>"모르겠음" 응답은 0점 (미응답과 동일 처리)</li></ul>',
+  html:`
+  <div class="prog">
+    <div class="progtop"><span>진행 ${n}/17</span><span>판단가능성 ${score}/15</span></div>
+    <div class="progbar"><div class="progfill" style="width:${Math.round(n/17*100)}%"></div></div>
+  </div>
+  <h2 class="sh">${q}</h2>
+  <div style="margin-top:18px">${opts}</div>
+  <div class="why"><b>💡 왜 묻나요?</b>${why}</div>
+  <button class="btn" onclick="go('${next}')">다음 →</button>` };
+}
+
+S.s2a = qs(4,6,'계약은 지금 어떤 상태인가요?',`
+<button class="choice on" onclick="pick(this)"><span class="dot"></span>계약 기간이 이미 끝났습니다</button>
+<button class="choice" onclick="pick(this)"><span class="dot"></span>곧 끝납니다 (2개월 이내)</button>
+<button class="choice" onclick="pick(this)"><span class="dot"></span>아직 기간이 남았습니다</button>
+<button class="choice" onclick="pick(this)"><span class="dot"></span>중간에 나가려고 합니다</button>
+<button class="choice" onclick="pick(this)"><span class="dot"></span>잘 모르겠습니다</button>`,
+'계약이 끝났는지에 따라 보증금을 돌려달라고 할 수 있는 시점 자체가 달라집니다.','s2b');
+
+S.s2b = qs(7,9,'지금 그 집에 살고 계신가요?',`
+<button class="choice on" onclick="pick(this)"><span class="dot"></span>계속 살고 있습니다</button>
+<button class="choice" onclick="pick(this)"><span class="dot"></span>이미 이사했습니다</button>
+<button class="choice" onclick="pick(this)"><span class="dot"></span>곧 이사할 예정입니다</button>`,
+'살고 있는지, 전입신고가 그대로인지에 따라 대항력이 유지되는지가 달라집니다. 이사를 앞두고 계시면 순서가 중요해집니다.','s2c');
+
+S.s2c = qs(12,12,'집주인은 뭐라고 하던가요?',`
+<button class="choice" onclick="pick(this)"><span class="dot"></span>곧 준다고 합니다</button>
+<button class="choice on" onclick="pick(this)"><span class="dot"></span>새 세입자가 구해지면 준다고 합니다</button>
+<button class="choice" onclick="pick(this)"><span class="dot"></span>연락이 되지 않습니다</button>
+<button class="choice" onclick="pick(this)"><span class="dot"></span>일부만 주겠다고 합니다</button>
+<button class="choice" onclick="pick(this)"><span class="dot"></span>보증금에서 뺄 게 있다고 합니다</button>`,
+'집주인이 실제로 한 말이 나중에 어떤 주장으로 이어질지 미리 정리해 드리기 위해 필요합니다.','s2d');
+
+S.s2d = qs(14,12,'계약서에 특약사항이 적혀 있나요?',`
+<button class="choice" onclick="pick(this)"><span class="dot"></span>있습니다</button>
+<button class="choice" onclick="pick(this)"><span class="dot"></span>없습니다</button>
+<button class="choice on" onclick="pick(this)"><span class="dot"></span>잘 모르겠습니다</button>
+<button class="btn ghost" style="margin-top:10px">📷 계약서 사진 올리기</button>`,
+'특약에 따로 정한 내용이 있으면 결과가 달라질 수 있습니다. 지금은 "모르겠다"로 표시되어, 뒤에서 <b>확인 못 한 항목</b>으로 남습니다.','s3');
+
+/* ── 경고 인터럽트 ── */
+S.warn = { bar:'사실관계 확인', step:'Q8 인터럽트', nav:'WARN', navlabel:'⚠️ 경고 인터럽트',
+note:'<b>3층 표시 규칙의 실제 적용 예시입니다.</b><ul><li>🟢에는 <b>조문 원문 + 링크 + 시행 검증 표시</b>가 반드시 붙습니다</li><li>🟡은 <b>조건문("~한 경우")으로만</b> 쓰였습니다 — 정규식으로 강제 검사</li><li>"위험합니다 / 큰일났습니다 / 지금 당장 옮기세요" 같은 단정이 <b>한 줄도 없습니다</b></li><li>🟡 블록은 🟢 블록 없이 단독 생성 불가 (렌더링 차단)</li></ul>',
+html:`
+<div class="risk red">
+  <div class="riskt">🔴 먼저 확인하실 것이 있습니다</div>
+  <div style="font-size:15px;color:var(--ink2)">전입신고를 다른 곳으로 옮기셨다고 답하셨습니다.</div>
+</div>
+<div class="tier t-green">
+  <span class="lb">🟢 법에 있는 내용</span>
+  <b>「주택임대차보호법」제3조 제1항</b>
+  <div class="quote">임대차는 그 등기가 없는 경우에도 임차인이 주택의 인도와 주민등록을 마친 때에는 그 다음 날부터 제3자에 대하여 효력이 생긴다.</div>
+  <span class="verified">✅ 현재 시행 중 (법제처 API 대조 완료)</span>
+  <a class="srclink" href="#" onclick="return false">법령 원문 보기 →</a>
+</div>
+<div class="tier t-amber">
+  <span class="lb">🟡 내 사건에 적용될 가능성</span>
+  주민등록(전입신고)을 다른 곳으로 옮긴 경우, 위 조항에 따른 효력이 유지되는지가 문제될 수 있습니다.
+  <div style="margin-top:10px">이와 관련해 「주택임대차보호법」제3조의3의 임차권등기명령 제도가 있습니다.</div>
+  <a class="srclink" href="#" onclick="return false">임차권등기명령이란 →</a>
+</div>
+<div class="notice">⚠️ 이 상황은 시간이 중요할 수 있습니다. 무료 법률상담 창구를 먼저 확인해 보시기 바랍니다.</div>
+<button class="btn" onclick="go('s10')">무료 상담 창구 보기</button>
+<button class="btn ghost" onclick="go('s2d')">계속 진행하기</button>` };
+
+/* ── S3 ── */
+S.s3 = { bar:'사건 정리', step:'', nav:'S3', navlabel:'사건 정리 카드',
+note:'<b>"틀린 내용 고치기"가 정확도 장치입니다.</b> AI가 잘못 이해한 걸 사용자가 잡아주는 유일한 지점이라, 눈에 띄게 배치해야 합니다.<ul><li>타임라인은 나중에 <b>지급명령 신청서·소장에 그대로 쓰이는 자료</b>이기도 합니다</li><li>각 항목의 ✅ / ❓ 가 다음 화면(판단가능성 스코어)의 입력값</li><li>이 카드가 곧 "사건 객체" — GPT에는 이게 없어서 매번 처음부터 설명해야 함</li></ul>',
+html:`
+<span class="ailabel">🤖 AI가 정리한 내용입니다</span>
+<h2 class="sh">사건을 이렇게 정리했습니다</h2>
+<div class="casecard">
+  <div class="cn">🏠 내 전세보증금 사건</div>
+  <div class="cm">#TN-260815-01</div>
+  <div class="pb"><div class="pf" style="width:60%"></div></div>
+  <div class="pl"><span>진행률</span><span>60%</span></div>
+</div>
+<div class="card">
+  <table class="facts">
+    <tr><td>임차인 (나)</td><td>본인</td></tr>
+    <tr><td>임대인</td><td>[임대인 A]</td></tr>
+    <tr><td>보증금</td><td>5,000만원</td></tr>
+    <tr><td>주택 유형</td><td>빌라·다세대</td></tr>
+    <tr><td>계약 기간</td><td>2024.6.20~2026.6.19</td></tr>
+    <tr><td>계약 종료</td><td>확인됨 ✅</td></tr>
+    <tr><td>종료 후 경과</td><td style="color:var(--red)">57일</td></tr>
+    <tr><td>현재 거주</td><td>거주 중 ✅</td></tr>
+    <tr><td>전입신고</td><td>유지 중 ✅</td></tr>
+    <tr><td>확정일자</td><td>받음 ✅</td></tr>
+    <tr><td>반환 요구</td><td>2026.6.25 ✅</td></tr>
+    <tr><td>임대인 응답</td><td>"새 세입자 구하면"</td></tr>
+    <tr><td>공제 주장</td><td>없음 ✅</td></tr>
+    <tr><td>계약서 특약</td><td style="color:var(--amber)">모르겠음 ❓</td></tr>
+    <tr><td>반환보증</td><td>미가입</td></tr>
+    <tr><td>법원 서류</td><td>없음 ✅</td></tr>
+  </table>
+</div>
+<h3 class="ss">📅 사건 타임라인</h3>
+<div class="tl">
+  <div class="tlitem"><div class="tld">2024.06.20</div><div class="tlt">전세계약 체결</div></div>
+  <div class="tlitem"><div class="tld">2026.06.19</div><div class="tlt">계약 기간 종료</div></div>
+  <div class="tlitem"><div class="tld">2026.06.25</div><div class="tlt">보증금 반환 요구 (문자)</div></div>
+  <div class="tlitem"><div class="tld">2026.06.28</div><div class="tlt">"새 세입자 구하면 준다"</div></div>
+  <div class="tlitem now"><div class="tld">2026.08.15</div><div class="tlt" style="color:var(--red)">현재 · 미반환 57일째</div></div>
+</div>
+<button class="btn ghost" onclick="go('s2d')">✏️ 틀린 내용 고치기</button>
+<button class="btn" onclick="go('s4')">다음 →</button>` };
+
+/* ── S4 ── */
+S.s4 = { bar:'법률 근거', step:'', nav:'S4', navlabel:'법률 근거 (3층)',
+note:'<b>MVP에서는 판례를 뺍니다.</b> 판결서는 건당 1,000원·API 없음·벌크 다운로드 없음이고, AI Hub 판결문은 제3자 제공 금지입니다. 무엇보다 <b>환각 위험이 가장 높은 영역</b>입니다.<ul><li>대신 <b>조문 17개 화이트리스트</b>만 씁니다. LLM이 법령명을 생성하게 하지 않고, <b>먼저 조문을 확정한 뒤 원문을 컨텍스트로 넣어 "설명만" 시킵니다</b></li><li>그러면 검증 V1~V4(존재·번호·시행·문언)가 사실상 항상 통과합니다</li><li>검증은 LLM이 아니라 <b>코드</b>가 합니다 — LLM으로 LLM을 검증하면 두 번 틀릴 수 있음</li></ul>',
+html:`
+<span class="ailabel">🤖 AI가 정리한 내용입니다</span>
+<h2 class="sh">관련 법률을 찾았습니다</h2>
+<h3 class="ss" style="color:var(--green)">🟢 법에 있는 내용</h3>
+<div class="tier t-green">
+  <b>「주택임대차보호법」제4조 제2항</b>
+  <div class="quote">임대차기간이 끝난 경우에도 임차인이 보증금을 반환받을 때까지는 임대차관계가 존속되는 것으로 본다.</div>
+  <span class="verified">✅ 현재 시행 중 (검증됨)</span>
+  <a class="srclink" href="#" onclick="return false">법령 원문 보기 →</a>
+</div>
+<div class="tier t-green">
+  <b>「주택임대차보호법」제3조의3 (임차권등기명령)</b>
+  <div class="quote">임차인은 임대차가 끝난 후 보증금을 반환받지 못한 경우 법원에 임차권등기명령을 신청할 수 있습니다.</div>
+  <div style="font-size:14px;color:var(--ink2);margin-top:8px">📌 2023.7.19. 시행 개정으로 <b>임대인에게 결정이 고지되기 전에도</b> 임차권등기가 이루어질 수 있게 되었습니다.</div>
+  <span class="verified">✅ 현재 시행 중 (검증됨)</span>
+  <a class="srclink" href="#" onclick="return false">법령 원문 보기 →</a>
+</div>
+<div class="tier t-green">
+  <b>「민법」제536조 (동시이행의 항변권)</b>
+  <a class="srclink" href="#" onclick="return false">법령 원문 보기 →</a>
+</div>
+<h3 class="ss" style="color:var(--amber)">🟡 내 사건에 적용될 가능성</h3>
+<div class="tier t-amber">
+  말씀하신 대로 계약 기간이 끝났고 보증금을 돌려받지 못한 상태<b>라면</b>, 위 제4조 제2항과 제3조의3이 검토 대상이 될 수 있습니다.
+  <div style="margin-top:10px;font-size:13px;color:var(--ink3)">근거 · <span class="pill">🟢 제4조 제2항</span> <span class="pill">🟢 제3조의3</span></div>
+</div>
+<h3 class="ss" style="color:var(--red)">🔴 아직 확인하지 못한 것</h3>
+<div class="tier t-red">
+  <div style="margin-bottom:11px"><b>계약서 특약사항</b><br>
+  <span style="font-size:14px">특약 내용에 따라 결과가 달라질 수 있습니다.</span><br>
+  <a class="srclink" href="#" onclick="go('s2d');return false">계약서 올리기 →</a></div>
+  <div><b>등기부상 선순위 권리</b><br><a class="srclink" href="#" onclick="return false">확인 방법 보기 →</a></div>
+</div>
+<button class="btn" onclick="go('s5')">다음 →</button>` };
+
+/* ── S5 ── */
+S.s5 = { bar:'양측 주장', step:'', nav:'S5', navlabel:'양측 주장',
+note:'<b>실용적 가치가 하나 더 있습니다.</b> 사용자가 실제로 집주인과 통화하기 전에 이 화면을 보면, 나올 말을 미리 알고 대비합니다.<ul><li>②번처럼 <b>"아직 안 나온 주장"에 대해 지금 증거를 남기라고</b> 알려주는 게 시간 순서상 결정적입니다 — 이사 후에는 원상회복 증거를 못 남깁니다</li><li>"이렇게 반박하세요"는 절대 쓰지 않습니다. <b>"이런 말이 나올 수 있다" + "그때 필요한 자료는 이것"</b>까지만</li></ul>',
+html:`
+<span class="ailabel">🤖 AI가 정리한 내용입니다</span>
+<h2 class="sh">양쪽 입장을 정리했습니다</h2>
+<p class="small">이 화면은 실제 법원의 판단이 아니라, 어떤 이야기가 오갈 수 있는지 미리 보기 위한 것입니다.</p>
+<div class="vs">
+  <div class="vshd">👤 임차인 (나) 입장</div>
+  <div class="claim">"계약 기간이 끝났으니 보증금을 돌려받아야 한다"</div>
+  <div style="font-size:13px;color:var(--ink3);margin:10px 0 5px">뒷받침하는 확인된 사실</div>
+  <div class="fact">✅ 계약 기간 종료 (2026.6.19)</div>
+  <div class="fact">✅ 반환 요구함 (2026.6.25, 문자)</div>
+  <div class="fact">✅ 계속 거주 중 (대항요건 유지)</div>
+  <div class="fact">✅ 확정일자 있음</div>
+</div>
+<div class="vshd" style="margin:20px 0 9px">👤 임대인 쪽에서 나올 수 있는 말</div>
+<div class="vs">
+  <span class="tag said">실제로 들으신 말</span>
+  <div class="claim">① "새 세입자가 구해져야 준다"</div>
+  <div class="tier t-green" style="margin:10px 0 0">
+    <span class="lb">🟢 법에 있는 내용</span>
+    「주택임대차보호법」제4조 제2항은 임대차기간이 끝난 경우에도 보증금을 반환받을 때까지 임대차관계가 존속하는 것으로 본다고 정하고 있습니다.
+    <a class="srclink" href="#" onclick="return false">원문 보기 →</a>
+  </div>
+</div>
+<div class="vs">
+  <span class="tag notyet">아직 들으신 적 없음</span>
+  <div class="claim">② "집 상태 원상회복 비용을 빼겠다"</div>
+  <div class="tier t-red" style="margin:10px 0 0">
+    <span class="lb">🔴 이런 주장이 나올 경우</span>
+    미리 집 상태 사진을 남겨두는 것이 일반적입니다.
+    <a class="srclink" href="#" onclick="return false">증거 남기는 법 →</a>
+  </div>
+</div>
+<div class="vs">
+  <span class="tag notyet">확인 안 됨</span>
+  <div class="claim">③ "특약에 따로 정한 게 있다"</div>
+  <div class="tier t-red" style="margin:10px 0 0">
+    <span class="lb">🔴 계약서 특약을 확인하지 못했습니다</span>
+    <a class="srclink" href="#" onclick="go('s2d');return false">계약서 올리기 →</a>
+  </div>
+</div>
+<button class="btn" onclick="go('s6')">다음 →</button>` };
+
+/* ── S6 ── */
+S.s6 = { bar:'검토 결과', step:'', nav:'S6', navlabel:'심리 결과',
+note:'<b>🔴 판정이 나오면 화면은 "결과"가 아니라 "되돌아가기"입니다.</b> 부실한 결과를 보여주느니 안 보여주는 게 낫습니다.<ul><li>필수 9개 전부 + 총점 ≥12 → 🟢 정리 가능</li><li>필수 7개 이상 + 총점 ≥8 → 🟡 부분 정리</li><li>그 외 → 🔴 "정리할 수 없습니다" + 해당 질문 링크</li></ul><b>사용자 테스트의 핵심 관찰 지점:</b> "모른다"고 말하는 화면을 사용자가 <b>불신하는지 신뢰하는지</b>. 여기서 "이거 아무것도 안 알려주네"가 나오면 철학은 맞아도 제품이 안 됩니다.',
+html:`
+<h2 class="sh">사건 검토 결과</h2>
+<div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:baseline">
+    <span style="font-size:14px;color:var(--ink3)">정리 가능성</span>
+    <span style="font-size:23px;font-weight:800;color:var(--green)">12 <span style="font-size:15px;color:var(--ink3);font-weight:600">/ 15</span></span>
+  </div>
+  <div class="gauge"><div class="gaugefill" style="width:80%"></div></div>
+  <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink3)">
+    <span>필수 9/9 ✅</span><span>추가 3/6 ❓</span>
+  </div>
+</div>
+<div class="tier t-green"><span class="lb">🟢 판정</span><b>사건을 정리할 수 있는 상태입니다</b></div>
+<h3 class="ss">검토 절차</h3>
+<div class="card">
+  <div class="checkline"><span>① 사실관계 확인</span><span class="ok">✅</span></div>
+  <div class="checkline"><span>② 양측 주장 정리</span><span class="ok">✅</span></div>
+  <div class="checkline"><span>③ 관련 법령 검색</span><span class="ok">✅</span></div>
+  <div class="checkline"><span>④ 법령 유효성 검증</span><span class="ok">✅</span></div>
+  <div class="checkline"><span>⑤ 반대 주장 검토</span><span class="ok">✅</span></div>
+  <div class="checkline"><span>⑥ 미확인 사항 표시</span><span class="ok">✅</span></div>
+</div>
+<h3 class="ss">📋 현재 상태 요약</h3>
+<div class="card">· 계약 기간이 끝난 것으로 확인되었습니다<br>· 보증금 반환을 요구한 기록이 있습니다<br>· 대항요건(거주 + 전입신고)이 유지되고 있습니다<br>· 확정일자를 받으셨습니다</div>
+<div class="tier t-red">
+  <span class="lb">🔴 결과에 영향을 줄 수 있는 미확인 사항 3가지</span>
+  · 계약서 특약 내용<br>· 등기부상 선순위 권리<br>· 임대인의 공제 주장 가능성
+</div>
+<div class="notice">⚠️ 이 결과는 <b>법률 판단이 아니라</b> 입력하신 내용을 정리한 참고 정보입니다.<br><b>승소 가능성은 안내하지 않습니다.</b></div>
+<button class="btn" onclick="go('s7')">다음 →</button>` };
+
+/* ── S7 ── */
+S.s7 = { bar:'오늘 할 일', step:'', nav:'S7', navlabel:'긴급도 · 오늘 할 일',
+note:'<b>"오늘 할 수 있는 일"이 이 제품의 핵심 지표입니다.</b><ul><li>항목을 <b>3개 이하로 유지</b>하고, 각각이 <b>오늘 안에 끝날 수 있어야</b> 합니다</li><li>"소송을 검토하세요"는 오늘 할 수 있는 일이 아닙니다. "사진 한 장 올리기"는 오늘 할 수 있습니다</li><li>GPT는 다음에 물어보면 <b>처음부터 다시 시작</b>합니다</li></ul><b>긴급도 판정:</b> 🔴 법원서류·경매·전입이전·7일내 이사 → 하드스톱 / 🟠 보증 1개월 임박·연락두절 30일 / 🟢 그 외',
+html:`
+<div class="risk amber">
+  <div class="riskt">🟠 주의</div>
+  <div style="font-size:15px;color:var(--ink2)">계약 종료 후 <b>57일</b>이 지났습니다.<br>현재 법원이나 수사기관의 대응 기한이 걸린 상황은 확인되지 않았습니다.</div>
+</div>
+<h3 class="ss">📌 오늘 할 수 있는 일</h3>
+<div class="card" style="padding:4px 16px">
+  <div class="todo"><div class="chk" id="c0" onclick="tog(0)"></div>
+    <div style="flex:1"><div class="todot">1. 계약서 특약 확인</div><div class="todos">사진 한 장이면 됩니다</div></div></div>
+  <div class="todo"><div class="chk" id="c1" onclick="tog(1)"></div>
+    <div style="flex:1"><div class="todot">2. 등기부등본 떼어보기</div><div class="todos">인터넷등기소 · 700원</div></div></div>
+  <div class="todo" style="border-bottom:none"><div class="chk" id="c2" onclick="tog(2)"></div>
+    <div style="flex:1"><div class="todot">3. 문자 캡처해 두기</div><div class="todos">지금까지 주고받은 내용</div></div></div>
+</div>
+<h3 class="ss">⏰ 기억해 둘 시점</h3>
+<div class="notice">이사를 계획 중이라면 <b>이사 전에 임차권등기를 마치는 것</b>이 일반적입니다.
+  <a class="srclink" href="#" onclick="go('s9');return false">자세히 보기 →</a></div>
+<button class="btn" onclick="go('s8')">다음 →</button>` };
+
+/* ── S8 ── */
+S.s8 = { bar:'다음 단계', step:'', nav:'S8', navlabel:'갈림길 (3분기)',
+note:'<b>순서가 곧 미션입니다.</b> 무료 법률지원을 맨 위, 가장 크게 배치했습니다.<ul><li>이건 윤리 문제만이 아니라 <b>변호사법 제34조 리스크 관리</b>이기도 합니다</li><li>유료 변호사 연결이 <b>첫 번째 출구인 제품</b>과 <b>세 번째 출구인 제품</b>은 "알선" 판단에서 다르게 보일 여지가 있습니다</li><li>※ 제34조 각 항 문언은 원문 대조 필요. 수익모델 확정 전 변호사법 전문가 검토 필수</li></ul>',
+html:`
+<h2 class="sh">이제 무엇을 하시겠어요?</h2>
+<button class="opt primary" onclick="go('s10')">
+  <div class="optt">🏛️ 무료 법률지원 알아보기</div>
+  <div class="optd">소득 요건 등에 따라 무료로 도움을 받을 수 있는 공적 창구가 있습니다.</div>
+  <span class="optgo">여기부터 확인해 보세요 →</span></button>
+<button class="opt" onclick="go('s9')">
+  <div class="optt">🛡️ 변호사 없이 직접 해보기</div>
+  <div class="optd">본인이 직접 신청할 수 있는 공식 절차를 단계로 알려드립니다.</div>
+  <span class="optgo">→</span></button>
+<button class="opt" onclick="go('s11')">
+  <div class="optt">💰 비용이 궁금해요</div>
+  <div class="optd">법으로 정해진 비용과 변호사 선임료를 나누어 보여드립니다.</div>
+  <span class="optgo">→</span></button>
+<div class="notice">세 가지 모두 보셔도 됩니다. 언제든 내 사건으로 돌아올 수 있습니다.</div>
+<button class="btn ghost" onclick="go('s12')">📁 내 사건 보관하기</button>` };
+
+/* ── S9 ── */
+S.s9 = { bar:'직접 해결 절차', step:'', nav:'S9', navlabel:'직접 해결 절차',
+note:'<b>대법원 2025두35483이 그은 선입니다.</b> (2025.2.12. 심리불속행, 서울변회 패소)<ul><li>✅ <b>적법</b>: 이용자가 미리 준비된 양식의 빈칸을 채워 넣는 방식 — "이용자의 작업 보조 수준"</li><li>⚠️ <b>위반 소지</b>: 생성형 AI가 이용자 입력을 바탕으로 법률문서를 작성</li><li>⚠️ <b>위반 소지</b>: 개별 사실관계를 토대로 한 사건 검토</li></ul>그래서 STEP 2가 "AI가 써드립니다"가 아니라 <b>"저희는 대신 써드리지 않습니다 + 빈 양식"</b>입니다. 빈칸 값은 인터뷰에서 사용자가 <b>이미 답한 값을 복사</b>합니다 — AI가 새로 만들지 않습니다.',
+html:`
+<h2 class="sh">직접 해볼 수 있는 절차</h2>
+<p class="small">아래는 모두 본인이 직접 신청할 수 있는 공식 절차입니다. 순서대로 진행하지 않아도 됩니다.</p>
+
+<div class="stepbox">
+  <div class="stephd"><span class="stepn">STEP 1</span><span class="stept">증거 정리</span>
+    <span style="margin-left:auto;font-size:13px;color:var(--green);font-weight:700">4/6</span></div>
+  <div class="stepbd">
+    <table class="ev">
+      <tr><td>임대차계약서</td><td>✅</td><td>🔴</td></tr>
+      <tr><td>보증금 송금 내역</td><td>✅</td><td>🔴</td></tr>
+      <tr><td>반환 요구 문자</td><td>✅</td><td>🟠</td></tr>
+      <tr><td>임대인 답변</td><td>✅</td><td>🔴</td></tr>
+      <tr><td style="color:var(--red);font-weight:600">계약서 특약 부분</td><td>❌</td><td>🔴</td></tr>
+      <tr><td>집 상태 사진</td><td>❌</td><td>🟡</td></tr>
+    </table>
+    <button class="btn ghost">자료 올리기</button>
+  </div>
+</div>
+
+<div class="stepbox">
+  <div class="stephd"><span class="stepn">STEP 2</span><span class="stept">내용증명</span></div>
+  <div class="stepbd">
+    <p class="body" style="margin-bottom:10px">우체국이 "이런 내용의 우편을 언제 보냈다"는 사실을 증명해 주는 제도입니다.</p>
+    <div style="font-size:14.5px;color:var(--ink2);margin-bottom:14px">
+      · 우체국 방문 또는 인터넷우체국<br>· 3부 작성 (상대방 · 우체국 · 본인)<br>· 비용 약 5,000원 내외</div>
+    <div class="tier t-amber" style="margin-bottom:13px">
+      <span class="lb">⚠️ 저희는 내용증명을 대신 써드리지 않습니다</span>
+      아래 양식의 빈칸을 직접 채워 사용하세요.</div>
+    <div class="formmock">
+      <div style="font-weight:700;margin-bottom:12px;font-size:14px">내 용 증 명</div>
+      <div class="frow"><span class="flab">받는 사람</span><span class="fbox"></span></div>
+      <div class="frow"><span class="flab">주소</span><span class="fbox"></span></div>
+      <div class="frow"><span class="flab">보내는 사람</span><span class="fbox"></span></div>
+      <div class="frow"><span class="flab">주소</span><span class="fbox"></span></div>
+      <div class="frow"><span class="flab">임대차 목적물</span><span class="fbox"></span></div>
+      <div class="frow"><span class="flab">보증금액</span><span class="fbox"></span></div>
+      <div class="frow"><span class="flab">계약기간</span><span class="fbox"></span></div>
+      <div class="frow" style="margin-bottom:0"><span class="flab">반환 요구일</span><span class="fbox"></span></div>
+    </div>
+    <p class="small" style="margin-top:10px">※ 이 양식은 일반적인 서식이며, 개별 사건에 맞는 내용은 본인이 판단하여 작성하셔야 합니다.</p>
+    <button class="btn ghost">빈 양식 받기</button>
+  </div>
+</div>
+
+<div class="stepbox">
+  <div class="stephd"><span class="stepn">STEP 3</span><span class="stept">임차권등기명령</span></div>
+  <div class="stepbd">
+    <p class="body" style="font-weight:700;color:var(--ink)">🏠 이사를 계획하고 계신가요?</p>
+    <div class="tier t-green">
+      <span class="lb">🟢 법에 있는 내용</span>
+      「주택임대차보호법」제3조의3은 임대차가 끝난 후 보증금을 반환받지 못한 임차인이 법원에 임차권등기명령을 신청할 수 있도록 정하고 있습니다.
+      <a class="srclink" href="#" onclick="return false">원문 보기 →</a></div>
+    <div style="font-size:14.5px;color:var(--ink2);margin-top:12px">📌 2023.7.19. 시행 개정으로 임대인에게 결정이 고지되기 전에도 등기가 이루어질 수 있게 되었습니다.</div>
+    <div style="font-size:14.5px;color:var(--ink2);margin-top:12px">· 관할: 주택 소재지 지방법원<br>· 전자소송 또는 법원 방문<br>· 인지 · 송달료 · 등록면허세 별도</div>
+  </div>
+</div>
+
+<div class="stepbox">
+  <div class="stephd"><span class="stepn">STEP 4</span><span class="stept">지급명령 (독촉절차)</span></div>
+  <div class="stepbd">
+    <div class="tier t-green">
+      <span class="lb">🟢 법에 있는 내용</span>
+      「민사소송법」제462조 이하의 독촉절차입니다. 상대방이 지급명령을 송달받은 날부터 <b>2주 이내</b>에 이의신청을 하면 소송절차로 넘어갑니다 (제470조 제1항).
+      <a class="srclink" href="#" onclick="return false">원문 보기 →</a></div>
+    <div class="costbox" style="margin-top:13px">
+      <div class="costhd">📊 내 사건 기준 (보증금 5,000만원)</div>
+      <div class="costrow"><span>인지대 (전자소송)</span><span class="n">20,700원</span></div>
+      <div class="costrow"><span>송달료 (2명 × 6회)</span><span class="n">66,000원</span></div>
+      <div class="costrow total"><span>합계</span><span class="n">약 86,700원</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="stepbox">
+  <div class="stephd"><span class="stepn">STEP 5</span><span class="stept">보증금반환소송</span></div>
+  <div class="stepbd">
+    <div class="notice" style="margin-top:0">📌 보증금 5,000만원은 <b>소액사건(3,000만원 이하)에 해당하지 않습니다.</b></div>
+    <div class="costbox">
+      <div class="costhd">📊 내 사건 기준</div>
+      <div class="costrow"><span>인지대 (전자소송)</span><span class="n">207,000원</span></div>
+      <div class="costrow"><span>송달료 (2명 × 15회)</span><span class="n">165,000원</span></div>
+      <div class="costrow total"><span>합계</span><span class="n">약 372,000원</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="notice">⚠️ 어느 절차를 선택할지는 사건마다 다릅니다. 판단이 어려우면 무료 법률상담 창구를 이용해 보세요.</div>
+<button class="btn ghost" onclick="go('s10')">무료 상담 창구 보기</button>
+<button class="btn quiet" onclick="go('s12')">내 사건으로 돌아가기</button>` };
+
+/* ── S9B ── */
+S.s9b = { bar:'반환보증 트랙', step:'', nav:'S9B', navlabel:'🔀 반환보증 가입 분기',
+note:'<b>리서치에서 나온 가장 실용적인 발견입니다.</b> 보증에 가입한 사용자는 소송 트랙을 타면 안 됩니다 — 완전히 다른 절차입니다.<ul><li>보증사고 = 계약 종료 후 <b>1개월</b> 미반환 (또는 경매·공매 후 미회수)</li><li>이행청구에는 통상 <b>임차권등기가 필요</b> → <b>이사 전에</b> 등기를 마쳐야 하는 경우가 많음</li></ul><b>이 화면이 "직접 확인하세요"로 끝나는 이유</b> — 이행청구 기한을 "2개월"로 쓴 자료가 있으나 <b>단일 출처이고 HUG 약관으로 확인하지 못했습니다.</b> 기한처럼 놓치면 치명적인 정보는 <b>확인 안 된 상태로 절대 표시하지 않습니다.</b>',
+html:`
+<h2 class="sh">🏛️ 전세보증금 반환보증에<br>가입하셨습니다</h2>
+<p class="body">이 경우 소송보다 먼저 확인할 절차가 있습니다.</p>
+<h3 class="ss">📌 보증사고 요건</h3>
+<div class="card"><div style="font-size:15px;color:var(--ink2);line-height:1.72">
+  <b>①</b> 전세계약이 끝난 후 <b>1개월</b>이 지나도록 정당한 사유 없이 보증금을 반환받지 못한 경우<br><br>
+  <b>②</b> 계약 기간 중 <b>경매·공매</b>가 실시되어 배당 후에도 보증금 전부 또는 일부를 반환받지 못한 경우
+</div></div>
+<div class="tier t-amber"><span class="lb">내 사건</span>계약 종료 후 <b>57일</b> → ① 요건에 해당할 수 있습니다</div>
+<h3 class="ss" style="color:var(--red)">🔴 이행청구 전에 반드시 확인</h3>
+<div class="tier t-red">
+  이행청구에는 통상 <b>임차권등기</b>가 필요합니다.<br>(임차권등기명령 결정문 또는 등기사항증명서)
+  <div style="margin-top:10px">⚠️ 이사를 계획하고 계시다면 <b>이사 전에</b> 임차권등기를 마쳐야 하는 경우가 많습니다.</div>
+  <a class="srclink" href="#" onclick="go('s9');return false">임차권등기명령 보기 →</a></div>
+<h3 class="ss">📞 정확한 요건과 기한은 보증기관에 직접</h3>
+<div class="card">
+  <button class="linkrow"><span>HUG 주택도시보증공사</span><span>1566-9009</span></button>
+  <button class="linkrow"><span>HF 한국주택금융공사</span><span>1688-8114</span></button>
+  <button class="linkrow" style="border-bottom:none"><span>SGI 서울보증</span><span>1670-7000</span></button>
+</div>
+<div class="notice">⚠️ <b>이행청구 기한은 기관·상품별로 다를 수 있어 저희가 안내하지 않습니다.</b> 반드시 직접 확인하시기 바랍니다.</div>
+<button class="btn quiet" onclick="go('s8')">← 돌아가기</button>` };
+
+/* ── S10 ── */
+S.s10 = { bar:'무료 법률지원', step:'', nav:'S10', navlabel:'무료 법률지원',
+note:'<b>"저희가 소개비를 받지 않습니다"</b>를 첫 줄에 박습니다. 변호사법 제34조 관점에서도, 사용자 신뢰 관점에서도 중요합니다.<ul><li><b>법률구조서비스 통합시스템(helplaw24.go.kr)</b>은 2026.1.21. 개통한 신규 창구 — 법무부 주관 35개 기관 통합. 아는 사람이 아직 거의 없어 정보 가치가 큽니다</li><li>전세사기피해자 지원 특별법은 <b>2027.5.31.까지 유효</b>, 2025.5.31. 이전 계약 체결자가 대상</li><li>⚠️ 법률구조공단 지원 요건 상세는 <b>원문 확인 필요</b> (2차 출처만 확보)</li></ul>',
+html:`
+<h2 class="sh">무료로 도움받을 수 있는 곳</h2>
+<p class="small">아래는 모두 공적 기관입니다. <b>저희가 소개비를 받지 않습니다.</b></p>
+<div class="stepbox">
+  <div class="stephd"><span class="stepn">①</span><span class="stept">법률구조서비스 통합시스템</span></div>
+  <div class="stepbd">
+    <p class="small" style="margin-bottom:10px">2026.1.21. 개통. 법무부 주관으로 <b>35개 기관을 통합</b>한 창구입니다.</p>
+    <div style="font-size:14.5px;color:var(--ink2)">· 나에게 맞는 서비스 찾기<br>· 법률복지지도<br>· 면접 · 화상 · 전화 · 사이버 상담<br>· AI 컨택센터 <b>1661-3119</b></div>
+    <button class="btn ghost">helplaw24.go.kr →</button>
+  </div>
+</div>
+<div class="stepbox">
+  <div class="stephd"><span class="stepn">②</span><span class="stept">대한법률구조공단</span></div>
+  <div class="stepbd">
+    <div style="font-size:14.5px;color:var(--ink2)">· 무료 법률상담 <b>국번없이 132</b><br>· 소득 요건 등에 따라 소송대리 지원<br>· AI 챗봇 '법률똑똑이' (주택임대차 포함)</div>
+    <div class="notice" style="margin-bottom:0">⚠️ 지원 대상 요건은 소득 · 재산 기준에 따라 달라집니다. 공단에서 직접 확인하세요.</div>
+  </div>
+</div>
+<div class="stepbox">
+  <div class="stephd"><span class="stepn">③</span><span class="stept">주택임대차분쟁조정위원회</span></div>
+  <div class="stepbd">
+    <p class="small" style="margin-bottom:10px">소송 전에 조정을 시도할 수 있는 기관입니다.</p>
+    <button class="linkrow"><span>한국부동산원 · LH</span><span>adrhome.reb.or.kr →</span></button>
+    <button class="linkrow" style="border-bottom:none"><span>법률구조공단</span><span>hldcc.or.kr →</span></button>
+  </div>
+</div>
+<div class="stepbox">
+  <div class="stephd"><span class="stepn">④</span><span class="stept">전세피해 관련 창구</span></div>
+  <div class="stepbd">
+    <button class="linkrow"><span>전세사기피해자 지원관리시스템</span><span>→</span></button>
+    <button class="linkrow"><span>HUG 전세피해지원센터</span><span>→</span></button>
+    <button class="linkrow" style="border-bottom:none"><span>시 · 도별 전세피해지원센터</span><span>→</span></button>
+    <div class="notice" style="margin-bottom:0">📌 전세사기피해자 지원 특별법은 <b>2027.5.31.까지</b> 유효합니다. 2025.5.31. 이전 계약 체결자가 대상입니다.</div>
+  </div>
+</div>
+<div class="stepbox">
+  <div class="stephd"><span class="stepn">⑤</span><span class="stept">대법원 나홀로소송</span></div>
+  <div class="stepbd">
+    <p class="small" style="margin-bottom:10px">소장 작성 방법과 서식을 법원이 직접 제공합니다.</p>
+    <button class="btn ghost">pro-se.scourt.go.kr →</button>
+  </div>
+</div>
+<button class="btn quiet" onclick="go('s12')">내 사건으로 돌아가기</button>` };
+
+/* ── S11 ── */
+S.s11 = { bar:'비용', step:'', nav:'S11', navlabel:'비용 (2층 구조)',
+note:'<b>"데이터 수집 중"이 정직한 설계입니다.</b> 표본 없이 "250~450만원"을 표시하면 그건 추정이 아니라 <b>지어낸 숫자</b>입니다.<ul><li>대신 <b>A(법정비용)만으로도 충분히 새로운 정보</b>입니다. "지급명령은 8만 7천원이면 된다"를 아는 사람이 거의 없고, 이 숫자는 <b>지금 당장 완벽히 정확하게</b> 계산됩니다</li><li>B의 빈칸이 <b>데이터 수집 장치</b>가 됩니다 — 6개월 뒤 가장 큰 자산</li><li>440만원은 <b>선임료 시세가 아니라</b> 이겼을 때 상대방에게 부담시킬 수 있는 <b>상한</b>입니다</li></ul>',
+html:`
+<h2 class="sh">비용</h2>
+<p class="body">비용은 성격이 완전히 다른 두 가지로 나뉩니다.</p>
+<h3 class="ss" style="color:var(--green)">A. 법으로 정해진 비용</h3>
+<p class="small" style="margin-top:-4px">계산할 수 있습니다</p>
+<div class="costbox">
+  <div class="costhd">지급명령을 하는 경우 (5,000만원)</div>
+  <div class="costrow"><span>인지대 (전자소송)</span><span class="n">20,700원</span></div>
+  <div class="costrow"><span>송달료 (2명×6회×5,500원)</span><span class="n">66,000원</span></div>
+  <div class="costrow total"><span>합계</span><span class="n">약 86,700원</span></div>
+</div>
+<div class="costbox">
+  <div class="costhd">소송을 하는 경우</div>
+  <div class="costrow"><span>인지대 (전자소송)</span><span class="n">207,000원</span></div>
+  <div class="costrow"><span>송달료 (2명×15회×5,500원)</span><span class="n">165,000원</span></div>
+  <div class="costrow total"><span>합계</span><span class="n">약 372,000원</span></div>
+</div>
+<div class="notice">📖 <b>계산 근거</b><br>· 인지대: 민사소송 등 인지법 제2조 제1항<br>&nbsp;&nbsp;(1천만~1억 구간: 소가 × 45/10,000 + 5,000)<br>· 전자소송 감액: 같은 법 제16조 (10분의 9)<br>· 지급명령 인지: 제7조 제2항 (소장 인지액의 1/10)<br>· 송달료: 1회 5,500원 (2025.6.1~, 대법원예규 제2025-24호)
+  <a class="srclink" href="#" onclick="return false">원문 보기 →</a></div>
+
+<h3 class="ss" style="color:var(--amber)">B. 변호사 선임료</h3>
+<div class="tier t-red">
+  <span class="lb">⚠️ 여기서 헷갈리기 쉬운 것</span>
+  <div style="text-align:center;padding:10px 0;font-size:15px;line-height:1.85">
+    <b>"소송비용에 산입되는 변호사보수"</b><br>
+    <span style="font-size:21px;color:var(--red);font-weight:800">≠</span><br>
+    <b>"실제로 변호사에게 지급하는 선임료"</b></div>
+</div>
+<div class="tier t-green">
+  <span class="lb">🟢 법에 있는 내용</span>
+  <b>「변호사보수의 소송비용 산입에 관한 규칙」제3조 제1항</b>
+  <div class="quote">소송비용에 산입되는 변호사의 보수는 당사자가 보수계약에 의하여 <b>지급한 또는 지급할 보수액의 범위 내에서</b> 각 심급단위로 소송목적의 값에 따라 별표의 기준에 의하여 산정한다.</div>
+  <a class="srclink" href="#" onclick="return false">원문 보기 →</a>
+</div>
+<div class="card"><div style="font-size:15px;color:var(--ink2);line-height:1.74">
+  소가 5,000만원 사건에서 별표상 산입 기준액은 <b style="color:var(--ink)">440만원</b>입니다.<br><br>
+  하지만 이 숫자는<br>· 실제 선임료의 <b>시세가 아니고</b><br>· 실제 지급액을 <b>넘을 수 없으며</b><br>· 이겼을 때 상대방에게 부담시킬 수 있는 <b>상한</b>입니다
+</div></div>
+<h3 class="ss">📊 실제 시장 선임료 추정</h3>
+<div class="empty">
+  <div style="font-size:16px;font-weight:700;color:var(--ink2);margin-bottom:10px">데이터 수집 중</div>
+  신뢰할 만한 표본이 모이기 전까지는<br>추정치를 표시하지 않습니다.<br><br>
+  <b>근거 없는 금액을 보여드리는 것보다<br>비워두는 편이 낫다고 판단했습니다.</b>
+</div>
+<button class="btn ghost">견적 받아보신 적 있나요? 익명으로 알려주기</button>
+<button class="btn quiet" onclick="go('s12')">내 사건으로 돌아가기</button>` };
+
+/* ── S12 ── */
+S.s12 = { bar:'내 사건', step:'', nav:'S12', navlabel:'📁 내 사건 대시보드',
+note:'<b>이 화면이 제품의 진짜 정체입니다.</b> S0~S11은 한 번 쓰고 끝나지만, S12는 사건이 끝날 때까지 계속 돌아오는 곳입니다. <b>GPT에는 이 화면이 없습니다.</b><ul><li>대화 / 문서 / 증거 / 날짜 / 법령 / 진행상태 / 다음 행동이 하나의 사건 객체로 묶임</li><li><b>푸시 알림</b>: 매주 월 09:00 "이번 주 할 일 1개" / 기한 D-7·D-3·D-1 / 30일 무변동 시 "진전이 있었나요?"</li><li>사용자 테스트 핵심 지표: <b>재방문 의사 60% 이상</b></li></ul>',
+html:`
+<h2 class="sh">📁 내 사건</h2>
+<div class="casecard">
+  <div class="cn">🏠 내 전세보증금 사건</div>
+  <div class="cm">5,000만원 · 계약 종료 후 57일</div>
+  <div class="pb"><div class="pf" style="width:60%"></div></div>
+  <div class="pl"><span>진행률</span><span>60%</span></div>
+  <div style="margin-top:12px;background:rgba(255,255,255,.16);border-radius:9px;padding:9px 13px;font-size:14.5px;font-weight:700">🟠 주의</div>
+</div>
+<h3 class="ss">📌 오늘 할 일</h3>
+<div class="card" style="padding:4px 16px">
+  <div class="todo"><span style="font-size:19px">🔴</span><div style="flex:1"><div class="todot">계약서 특약 확인</div><div class="todos">3일째 미완료</div></div></div>
+  <div class="todo"><span style="font-size:19px">🟡</span><div style="flex:1"><div class="todot">등기부등본 확인</div></div></div>
+  <div class="todo" style="border-bottom:none"><span style="font-size:19px">🟢</span><div style="flex:1"><div class="todot">문자 캡처 보관</div></div></div>
+</div>
+<h3 class="ss">📑 증거 보관함 <span style="font-weight:400;color:var(--ink3);font-size:14px">4/6</span></h3>
+<div class="card">
+  <table class="ev">
+    <tr><th>자료</th><th>상태</th><th>중요도</th></tr>
+    <tr><td>임대차계약서</td><td>✅</td><td>🔴</td></tr>
+    <tr><td>보증금 송금내역</td><td>✅</td><td>🔴</td></tr>
+    <tr><td>반환 요구 문자</td><td>✅</td><td>🟠</td></tr>
+    <tr><td>임대인 답변</td><td>✅</td><td>🔴</td></tr>
+    <tr><td style="color:var(--red);font-weight:600">계약서 특약</td><td>❌</td><td>🔴</td></tr>
+    <tr><td>집 상태 사진</td><td>❌</td><td>🟡</td></tr>
+  </table>
+</div>
+<h3 class="ss">📅 타임라인</h3>
+<div class="tl">
+  <div class="tlitem"><div class="tld">2024.06.20</div><div class="tlt">계약 체결</div></div>
+  <div class="tlitem"><div class="tld">2026.06.19</div><div class="tlt">계약 종료</div></div>
+  <div class="tlitem"><div class="tld">2026.06.25</div><div class="tlt">반환 요구</div></div>
+  <div class="tlitem"><div class="tld">2026.06.28</div><div class="tlt">"새 세입자 구하면"</div></div>
+  <div class="tlitem now"><div class="tld">2026.08.15</div><div class="tlt">현재</div></div>
+</div>
+<button class="btn quiet">+ 기록 추가하기</button>
+<div style="height:16px"></div>
+<button class="btn ghost" onclick="go('s6')">심리 결과 다시 보기</button>
+<button class="btn ghost" onclick="go('s9')">직접 해결 절차</button>
+<button class="btn ghost" onclick="go('s10')">무료 법률지원</button>
+<button class="btn ghost" onclick="go('s11')">비용</button>
+<button class="btn" onclick="go('s0')">+ 새 사건 만들기</button>` };
+
+/* ── S98 ── */
+S.s98 = { bar:'안내', step:'', nav:'S98', navlabel:'범위 밖 안내',
+note:'<b>좋은 이탈을 설계한 화면입니다.</b><ul><li>범위 밖 사용자를 억지로 붙잡으면 그게 곧 <b>부정확한 답변</b>이 됩니다</li><li>마지막 문장이 이 제품의 철학 그 자체</li><li>이 문장을 사용자가 <b>신뢰로 받는지 실망으로 받는지</b>가 테스트 핵심 관찰 지점</li></ul>',
+html:`
+<div style="text-align:center;padding:26px 0 14px"><div style="font-size:50px">🙏</div></div>
+<h2 class="sh center">죄송합니다</h2>
+<p class="body center">이 서비스는 지금 <b>주택 전세 · 보증부월세 계약이 끝난 뒤 보증금을 돌려받지 못한 경우</b>만 다루고 있습니다.</p>
+<p class="body center">말씀하신 사건은 아직 다루지 못합니다.</p>
+<h3 class="ss">대신 아래에서 도움을 받으실 수 있습니다</h3>
+<div class="card">
+  <button class="linkrow"><span>법률구조서비스 통합시스템</span><span>1661-3119 →</span></button>
+  <button class="linkrow"><span>대한법률구조공단</span><span>132 →</span></button>
+  <button class="linkrow" style="border-bottom:none"><span>찾기쉬운 생활법령정보</span><span>easylaw.go.kr →</span></button>
+</div>
+<div class="notice">잘 모르는 분야에 대해 <b>그럴듯한 답을 만들어 드리는 것이 가장 위험하다</b>고 생각합니다.<br>그래서 여기서 멈춥니다.</div>
+<button class="btn quiet" onclick="go('s0')">처음으로</button>` };
+
+/* ── S99 ── */
+S.s99 = { bar:'긴급', step:'', nav:'S99', navlabel:'🔴 고위험 하드스톱',
+note:'<b>"계속 진행" 버튼이 없는 것이 설계의 핵심입니다.</b> 있으면 사용자는 누릅니다.<ul><li>트리거: 경매개시결정 / 법원 소장·지급명령 / 형사 요소 / 다른 소송 진행 중 / 임대인 사망·상속 / 상가 임대차</li><li>기한이 걸린 서류는 <b>AI가 끝까지 처리하지 않습니다</b></li><li>대신 5가지 <b>확인 체크리스트</b>만 제공 — 이건 판단이 아니라 문서 읽기 안내</li></ul>',
+html:`
+<div class="risk red">
+  <div class="riskt">🔴 기한이 걸린 상황입니다</div>
+  <div style="font-size:15px;color:var(--ink2)">법원에서 온 서류를 받으셨다고 하셨습니다.</div>
+</div>
+<div class="tier t-green">
+  <span class="lb">🟢 법에 있는 내용</span><b>「민사소송법」제256조 제1항</b>
+  <div class="quote">피고는 소장의 부본을 송달받은 날부터 <b>30일 이내</b>에 답변서를 제출하여야 한다.</div>
+  <a class="srclink" href="#" onclick="return false">원문 보기 →</a></div>
+<div class="tier t-green">
+  <b>「민사소송법」제470조 제1항</b>
+  <div class="quote">지급명령에 대한 이의신청은 송달받은 날부터 <b>2주 이내</b> (불변기간)</div>
+  <a class="srclink" href="#" onclick="return false">원문 보기 →</a></div>
+<div class="notice" style="background:var(--redsoft);border-color:var(--redline);color:var(--ink2)">
+  ⚠️ 기한이 정해진 법원 서류입니다.<br><b>AI가 정리한 정보만으로 대응하지 않으시길 권합니다.</b></div>
+<h3 class="ss">🚨 지금 바로 하실 일</h3>
+<div class="card">
+  <div class="checkline"><span>① 서류에 적힌 법원 이름 확인</span><span>☐</span></div>
+  <div class="checkline"><span>② 사건번호 확인</span><span>☐</span></div>
+  <div class="checkline"><span>③ 내가 원고인지 피고인지</span><span>☐</span></div>
+  <div class="checkline"><span>④ 서류를 받은 날짜</span><span>☐</span></div>
+  <div class="checkline"><span>⑤ 기한이 며칠까지인지</span><span>☐</span></div>
+</div>
+<h3 class="ss">📞 지금 연결할 곳</h3>
+<div class="card">
+  <button class="linkrow"><span>대한법률구조공단</span><span>132 →</span></button>
+  <button class="linkrow"><span>법률구조 통합시스템</span><span>1661-3119 →</span></button>
+  <button class="linkrow" style="border-bottom:none"><span>법원 민원</span><span>1588-9100 →</span></button>
+</div>
+<button class="btn danger" onclick="go('s10')">무료 법률지원 자세히 보기</button>
+<p class="small center" style="margin-top:14px">※ 이 사건은 AI 분석을 진행하지 않습니다.</p>` };
+
+/* ═══ 라우팅 ═══ */
+var ORDER = ['s0','s1','s2a','s2b','s2c','s2d','warn','s3','s4','s5','s6','s7','s8','s9','s9b','s10','s11','s12','s98','s99'];
+var hist = [];
+
+function go(id, isBack){
+  var s = S[id]; if(!s) return;
+  if(!isBack && hist[hist.length-1] !== id) hist.push(id);
+  document.getElementById('barTitle').textContent = s.bar;
+  document.getElementById('barStep').textContent = s.step || '';
+  document.getElementById('screen').innerHTML = s.html;
+  document.getElementById('noteTitle').textContent = s.navlabel;
+  document.getElementById('noteBody').innerHTML = s.note;
+  document.getElementById('back').hidden = hist.length < 2;
+  var ns = document.querySelectorAll('.navlist button');
+  for(var i=0;i<ns.length;i++) ns[i].className = (ns[i].getAttribute('data-id')===id ? 'on' : '');
+  for(var j=0;j<3;j++){ var e=document.getElementById('c'+j); if(e && state.todo[j]) e.className='chk on'; }
+  window.scrollTo(0,0);
+  closeSheets();
+}
+function goBack(){ hist.pop(); var p = hist[hist.length-1]; if(p) go(p, true); }
+function pick(el){
+  var cs = el.parentElement.querySelectorAll('.choice');
+  for(var i=0;i<cs.length;i++) cs[i].className='choice';
+  el.className='choice on';
+}
+function tog(i){
+  state.todo[i] = !state.todo[i];
+  document.getElementById('c'+i).className = state.todo[i] ? 'chk on' : 'chk';
+}
+function openSheet(id){
+  var already = document.getElementById(id).classList.contains('open');
+  closeSheets();
+  if(already) return;
+  document.getElementById(id).classList.add('open');
+  document.getElementById('scrim').classList.add('on');
+  document.getElementById(id==='navSheet'?'dNav':'dNote').classList.add('on');
+}
+function closeSheets(){
+  document.getElementById('navSheet').classList.remove('open');
+  document.getElementById('noteSheet').classList.remove('open');
+  document.getElementById('scrim').classList.remove('on');
+  document.getElementById('dNav').classList.remove('on');
+  document.getElementById('dNote').classList.remove('on');
+}
+
+var nl = document.getElementById('navlist');
+for(var i=0;i<ORDER.length;i++){
+  (function(id){
+    var b = document.createElement('button');
+    b.setAttribute('data-id', id);
+    b.innerHTML = '<span class="k">'+S[id].nav+'</span>'+S[id].navlabel;
+    b.onclick = function(){ go(id); };
+    nl.appendChild(b);
+  })(ORDER[i]);
+}
+
+go('s0');
+</script>
+</body>
+</html>

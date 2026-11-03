@@ -1,0 +1,17 @@
+# freezed 3.2.5 는 컬렉션 필드에 대해 `final` 파라미터를 가진 생성자를 만드는데,
+# Dart 3.13 컴파일러가 이를 거부한다 ("Can't have modifier 'final' here").
+# 방어적 복사(unmodifiable view)를 끄면 해당 코드가 생성되지 않는다.
+# 도메인 모델은 로드 후 읽기만 하므로 실질적 손실이 없다.
+targets:
+  $default:
+    builders:
+      freezed:
+        options:
+          make_collections_unmodifiable: false
+
+      # 중첩 모델도 Map 으로 펴서 내보낸다.
+      # 끄면 toJson() 이 모델 객체를 그대로 담아 fromJson 으로 되읽을 수 없다
+      # (jsonEncode 를 거칠 때만 동작). 원격 데이터 교체(M5)와 왕복 테스트에 필요하다.
+      json_serializable:
+        options:
+          explicit_to_json: true

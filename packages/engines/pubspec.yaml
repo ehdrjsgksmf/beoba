@@ -1,0 +1,16 @@
+name: engines
+description: 버바 계산 엔진. 순수 Dart. Flutter 의존 금지. 분야 무관.
+version: 0.1.0
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  domain_data:
+    path: ../domain_data
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.6

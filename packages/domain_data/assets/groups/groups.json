@@ -1,0 +1,13 @@
+{
+  "_": "분야 묶음. 첫 화면에는 이 이름만 선다. 분야가 0개인 묶음은 화면에 안 세운다 — 눌러서 0건이 되는 입구는 세우지 않는다(DECISIONS 228). 이름은 분류가 아니라 사람이 자기 일을 떠올리는 말이다. icon 은 apps/beoba 의 LineIcons 열쇠다 — 이모지가 아니다(DECISIONS 286). 그림을 아직 안 받은 묶음은 icon 을 비운다.",
+  "groups": [
+    { "id": "work",     "name": "일하다 생긴 일",        "icon": "briefcase", "order": 10 },
+    { "id": "home",     "name": "살던 집 문제",          "icon": "house", "order": 20 },
+    { "id": "trade",    "name": "사고파는 일",           "icon": "bag", "order": 30 },
+    { "id": "money",    "name": "돈을 받거나 갚는 일",    "icon": "banknote", "order": 40 },
+    { "id": "deceived", "name": "누가 나를 속였을 때",    "icon": "alert-bubble", "order": 50 },
+    { "id": "injury",   "name": "다치거나 사고가 났을 때", "order": 60 },
+    { "id": "family",   "name": "가족과 안전",           "icon": "shield", "order": 70 },
+    { "id": "public",   "name": "관공서와 부딪혔을 때",   "order": 80 }
+  ]
+}

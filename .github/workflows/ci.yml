@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    # **`if:` 는 단계 안의 env 를 못 본다.** 잡 자리에 둬야 「열쇠가 없으면
+    # 건너뛴다」가 성립한다. 값이 없으면 빈 문자열이 된다.
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: melos 설치
+        run: dart pub global activate melos
+
+      - name: 의존성
+        run: melos bootstrap
+
+      - name: 코드 생성
+        run: melos run gen
+
+      - name: 검증 (정적 분석 + 테스트 + 도메인 JSON 전수)
+        run: melos run verify
+
+      # 테스트는 Dart VM 에서 돈다. 웹은 int 가 JS 실수(2^53)라 계산이 다르게 깨질 수
+      # 있고, 그건 릴리스 컴파일에서만 드러난다 (DECISIONS.md 20번).
+      # --no-web-resources-cdn: CanvasKit 과 엔진 폰트를 gstatic 이 아니라
+      # **같이 배포하는 것**으로 바꾼다. CDN 에서 오면 우리가 켠 압축이 거기엔
+      # 안 걸리고, 그 한 파일이 첫 화면 무게의 59%였다 (DECISIONS 220번).
+      # **배포 명령과 같은 플래그여야 한다** — 여기서만 빼면 CI 는 초록인데
+      # 사용자가 받는 것은 다른 물건이 된다.
+      - name: 웹 릴리스 빌드
+        run: flutter build web --release --no-web-resources-cdn
+        working-directory: apps/beoba
+
+      # ── 배포 ──────────────────────────────────────────────────
+      #
+      # **Flutter 를 두 번 설치하지 않는다.** Cloudflare Pages 의 빌드 환경에는
+      # Flutter 가 없어서 거기서 빌드하려면 매번 SDK 를 받아야 한다. 그런데
+      # 바로 위에서 이미 같은 명령으로 구웠다. 구운 것을 올리기만 한다.
+      #
+      # **산출물을 저장소에 넣지 않는다.** `build/web` 은 45MB 이고 그중
+      # 37MB 가 CanvasKit 변종들이다. 커밋하면 이력에서 못 지운다.
+      #
+      # 열쇠가 없으면 이 둘은 통째로 건너뛴다. 계정을 만들기 전까지 CI 는
+      # 지금과 똑같이 돈다.
+      - name: 배포 게이트 (평소에 경고인 것을 실패로 올린다)
+        if: env.CLOUDFLARE_API_TOKEN != '' && github.event_name == 'push'
+        run: dart run packages/engines/tool/verify_domains.dart --release
+
+      - name: Cloudflare Pages 로 올린다
+        if: env.CLOUDFLARE_API_TOKEN != '' && github.event_name == 'push'
+        run: npx --yes wrangler@4 pages deploy build/web --project-name=beoba --branch=main
+        working-directory: apps/beoba

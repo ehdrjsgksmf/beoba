@@ -1,0 +1,94 @@
+# ─────────────────────────────────────────────
+# 생성 파일은 저장소에 넣지 않습니다.
+# melos run gen 으로 언제든 다시 만듭니다.
+# ─────────────────────────────────────────────
+
+# 코드 생성 결과물 (freezed / json_serializable)
+*.g.dart
+*.freezed.dart
+*.config.dart
+*.gr.dart
+*.mocks.dart
+
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+pubspec.lock
+**/doc/api/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# melos
+pubspec_overrides.yaml
+.melos_tool/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+.DS_Store
+
+# Android
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/key.properties
+*.jks
+*.keystore
+
+# iOS
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Podfile.lock
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Runner.xcworkspace/xcshareddata/
+
+# macOS / Windows / Linux desktop
+**/macos/Flutter/ephemeral/
+**/macos/Pods/
+**/windows/flutter/ephemeral/
+**/linux/flutter/ephemeral/
+
+# 커버리지 / 로그
+coverage/
+*.log
+
+# 비밀
+.env
+.env.*
+!.env.example
+**/supabase/.temp/
+
+# 개인 편집기 설정
+.vscode/settings.local.json
+
+# 법령 원문 PDF 보관함.
+#
+# 법령 자체는 저작권 보호 대상이 아니라 보관에 문제가 없다. 저장소에 넣지 않는
+# 이유는 다른 데 있다 — 파일이 무겁고, 소스를 공개해도 여기 모은 것은 안 나간다.
+#
+# 확인이 끝난 내용은 JSON 의 verification.source 로 들어간다. PDF 는 그 근거를
+# 사람이 다시 볼 때 쓰는 것이지 앱이 읽는 데이터가 아니다.
+law/
+
+# 복지 데이터 원문 CSV·API 응답 보관함.
+#
+# law/ 와 같은 이유다. 앱이 읽는 것은 tool/build_welfare.dart 가 구운
+# assets/welfare/*.json 이고, 그게 진짜 데이터다.
+# 원문이 없는 곳(CI)에서는 생성기가 아무것도 쓰지 않고 멈춘다.
+#
+# **맨 앞의 / 를 빼지 마세요.** 안 그러면 구운 결과인
+# packages/domain_data/assets/welfare/ 까지 같이 사라집니다.
+/welfare/

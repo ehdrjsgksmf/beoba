@@ -1,0 +1,31 @@
+name: domain_data
+description: 버바 도메인 모델 · 로더 · 스키마 검증. 순수 Dart (Flutter 의존 금지).
+version: 0.1.0
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  freezed_annotation: ^3.0.0
+  json_annotation: ^4.12.0
+  meta: ^1.15.0
+
+dev_dependencies:
+  build_runner: ^2.4.13
+  freezed: ^3.0.0
+  json_serializable: ^6.8.0
+  lints: ^6.0.0
+  test: ^1.25.6
+
+# 앱은 package asset 경로로 참조한다:
+#   packages/domain_data/assets/domains/debt_recovery.json
+flutter:
+  assets:
+    - assets/domains/
+    - assets/groups/
+    - assets/holidays/
+    - assets/glossary/
+    - assets/courts/
+    - assets/welfare/

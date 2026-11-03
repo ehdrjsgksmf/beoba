@@ -1,0 +1,9 @@
+# Cloudflare Pages 되돌림 규칙.
+#
+# Flutter 라우트(/privacy · /result/... 등)는 서버에 파일이 없다. 새로고침하면
+# 404 가 나므로 앱 껍데기로 되돌린다.
+#
+# **실제 파일이 먼저다.** privacy-policy.html · main.dart.js · assets/ 는
+# 이 규칙에 닿기 전에 그대로 나간다. 200 은 주소를 안 바꾸는 되돌림이라
+# 브라우저 주소창에는 사람이 친 주소가 그대로 남는다.
+/*    /index.html   200

@@ -1,0 +1,49 @@
+# 개행은 저장소에서 항상 LF. Windows·CI(리눅스) 사이에서 CRLF 경고가 나지 않게 한다.
+# ★ 지우지 마세요 — Git for Windows 는 시스템 설정이 autocrlf=true 라 이 줄들이 없으면 작업 사본이 CRLF 로 풀리고,
+#   줄바꿈이 섞인 파일은 git 이 늘 「바뀌었다」고 봐서 stash 복구가 거부됩니다(2026-09-16, DECISIONS.md).
+* text=auto eol=lf
+
+# ── 소스 · 데이터 (LF 고정) ──
+*.dart   text eol=lf
+*.json   text eol=lf
+*.yaml   text eol=lf
+*.yml    text eol=lf
+*.md     text eol=lf
+*.gradle text eol=lf
+*.kt     text eol=lf
+*.java   text eol=lf
+*.html   text eol=lf
+*.css    text eol=lf
+*.js     text eol=lf
+*.xml    text eol=lf
+*.properties text eol=lf
+.gitignore     text eol=lf
+.gitattributes text eol=lf
+
+# ── Windows 전용 스크립트는 CRLF 여야 동작한다 ──
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# ── 바이너리 (건드리지 않는다) ──
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.ttf  binary
+*.otf  binary
+*.woff  binary
+*.woff2 binary
+*.pdf  binary
+*.zip  binary
+*.jar  binary
+*.keystore binary
+*.jks  binary
+*.apk  binary
+*.aab  binary
+
+# ── 리뷰·통계에서 제외 ──
+*.g.dart       linguist-generated
+*.freezed.dart linguist-generated

@@ -1,0 +1,75 @@
+name: beoba_workspace
+description: 버바 모노레포 루트. 코드는 packages/ 와 apps/ 에 있습니다.
+publish_to: none
+
+environment:
+  sdk: ^3.13.0
+
+# Dart pub workspace (melos 8 은 이 목록을 그대로 사용합니다)
+workspace:
+  - packages/domain_data
+  - packages/engines
+  - apps/beoba
+
+dev_dependencies:
+  melos: ^8.3.0
+
+melos:
+  name: beoba
+
+  command:
+    version:
+      includeCommitId: true
+
+  scripts:
+    analyze:
+      description: 정적 분석 (info 도 실패로 취급)
+      run: melos exec -- dart analyze --fatal-infos .
+
+    test:
+      description: 전체 테스트
+      run: melos run test:dart && melos run test:flutter
+
+    test:dart:
+      description: 순수 Dart 패키지 테스트
+      run: melos exec --no-flutter --dir-exists=test -- dart test
+
+    test:flutter:
+      description: Flutter 앱 테스트
+      run: melos exec --flutter --dir-exists=test -- flutter test
+
+    gen:
+      description: freezed / json_serializable 코드 생성
+      run: melos exec --depends-on=build_runner -- dart run build_runner build --delete-conflicting-outputs
+
+    build_privacy:
+      description: 개인정보처리방침 → 정적 한 장 + 앱 자산 (원본은 docs/ 에 커밋돼 있다)
+      run: dart run packages/engines/tool/build_privacy_page.dart
+
+    citation_report:
+      description: 인용 점검표를 다시 뽑는다 → docs/인용_점검.md (검사 (al)이 숫자를 맞대 본다)
+      run: dart run packages/engines/tool/build_citation_report.dart
+
+    verify_domains:
+      description: 도메인 JSON 전수 검증 (스키마 · 문구 · tests[] · 하드코딩)
+      run: dart run packages/engines/tool/verify_domains.dart
+
+    fetch_welfare:
+      description: 중앙부처 복지 API 를 순위 순으로 받는다 (.env 필요)
+      run: dart run packages/engines/tool/fetch_welfare_central.dart
+
+    fetch_welfare:p1:
+      description: 1순위만 이어받는다. 창이 열릴 때마다 다시 돌리면 된다
+      run: dart run packages/engines/tool/fetch_welfare_central.dart --priority 1
+
+    build_welfare:
+      description: 복지 CSV·XML → JSON. welfare/ 원본이 있는 곳에서만 돈다
+      run: dart run packages/engines/tool/build_welfare.dart
+
+    verify:
+      description: 커밋 전 전체 검증
+      run: melos run analyze && melos run test && melos run verify_domains
+
+    verify_release:
+      description: 배포 직전 게이트 — 평소에 경고인 것을 실패로 올린다 (연락처 빈칸 등)
+      run: melos run analyze && melos run test && dart run packages/engines/tool/verify_domains.dart --release

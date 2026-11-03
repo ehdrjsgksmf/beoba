@@ -1,0 +1,2146 @@
+{
+  "id": "_shared_crisis",
+  "version": "1.0.0",
+  "schemaVersion": 1,
+  "name": "위기 연결",
+  "shortName": "도움받기",
+  "icon": "🆘",
+  "status": "active",
+  "lastVerifiedAt": "2026-08-15",
+  "note": "① 위기 층. 전 분야 공통. 앱은 아무 판단도 하지 않고 창구만 표시한다.",
+  "lawScope": {
+    "note": "**겉이 닮은 법이 값은 다르다**(DECISIONS 186번). 한 갈래의 카드가 다른 법을 근거로 들면 화면은 멀쩡하고 값만 틀린다. 그래서 이 분야가 쓸 수 있는 법령을 여기 적어 두고 검사 (u)가 대조한다. **분야를 가로지르는 조각들이다.** 여기 조문은 어느 분야에서든 붙을 수 있어서 갈래를 안 탄다. 그래서 전부 공통이다 — 갈래를 타야 하는 조문이 생기면 그때 branches 를 연다.",
+    "laws": [
+      "공인중개사법",
+      "대부업법",
+      "민법",
+      "민사소송규칙",
+      "민사소송법",
+      "신용정보의 이용 및 보호에 관한 법률",
+      "전기통신사업법",
+      "전자금융거래법",
+      "채무자 회생 및 파산에 관한 법률",
+      "형법"
+    ],
+    "branches": []
+  },
+  "publicChannels": [
+    {
+      "id": "crisis_mental",
+      "priority": true,
+      "label": "마음이 힘들 때",
+      "org": "자살예방상담전화",
+      "phone": "109",
+      "note": "2024.1.1. 통합 운영. 24시간",
+      "verification": {
+        "status": "verified",
+        "source": "보건복지부 보도자료",
+        "sourceUrl": "https://www.mohw.go.kr/board.es?mid=a10503010100&bid=0027&list_no=1479607",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "crisis_gambling",
+      "priority": false,
+      "label": "도박 문제",
+      "org": "한국도박문제예방치유원",
+      "phone": "1336",
+      "url": "https://www.kcgp.or.kr",
+      "note": "헬프라인. 무료",
+      "verification": {
+        "status": "verified",
+        "source": "한국도박문제예방치유원 / 정부24",
+        "sourceUrl": "https://www.kcgp.or.kr/portal/main/contents.do?menuNo=200062",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "crisis_drug",
+      "priority": false,
+      "label": "마약 중독",
+      "org": "마약류 중독 상담",
+      "phone": "1342",
+      "note": "치료보호제도 안내 포함",
+      "verification": {
+        "status": "verified",
+        "source": "정부24 정책뉴스",
+        "sourceUrl": "https://www.gov.kr/portal/gvrnPolicy/view/H2402000001063149",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "crisis_debt",
+      "priority": false,
+      "label": "빚 문제",
+      "org": "신용회복위원회",
+      "phone": "1600-5500",
+      "url": "https://www.ccrs.or.kr",
+      "note": "채무조정 신청비 5만원. 그 외 추가비용 없음",
+      "notice": {
+        "agency": "신용회복위원회",
+        "checkedAt": "2026-08-18",
+        "dateScope": "visited",
+        "dataset": "신용회복위원회 채무조정 안내"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "신용회복위원회 공식 안내",
+        "sourceUrl": "https://www.ccrs.or.kr/cms/com/index.do?MENU_ID=470",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "crisis_welfare",
+      "priority": false,
+      "label": "당장 먹을 것·잘 곳이 없을 때",
+      "org": "보건복지상담센터",
+      "phone": "129",
+      "note": "긴급복지지원. 선지원 후조사 — 일단 신청하면 먼저 지급",
+      "verification": {
+        "status": "needs_check",
+        "source": "2차 출처(복지 정보 사이트)",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self",
+        "note": "지원 금액은 129 확인 후 표시할 것"
+      }
+    },
+    {
+      "id": "klac_132",
+      "priority": false,
+      "label": "법률 문제",
+      "org": "대한법률구조공단",
+      "phone": "132",
+      "url": "https://klac.or.kr",
+      "note": "무료 법률상담. 소송을 대신해 주는 것은 소득·재산 기준이 있어요. 전화로 확인해 보세요",
+      "verification": {
+        "status": "needs_check",
+        "source": "법률구조법 제7조 제2항 · 같은 법 시행령(대통령령 제32635호, 2022.8.18. 시행) 제4조 제3항 — 1차 원문 대조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-17",
+        "checkedBy": "self",
+        "note": "**확인을 마쳤고 이 항목은 닫힌다. 그런데 verified 로는 영영 못 간다.**\n\n'기준중위소득 125%' 를 적고 있었으나 법률구조법 제7조 제2항은 신분 요건을 열거할 뿐 소득 기준이 없다. 제11호의 '대통령령으로 정하는 자' 를 찾아 시행령 제4조 제3항을 받았는데, 거기에도 숫자가 없다 — 제6호가 '그 밖에 법률구조의 목적, 구조의 필요성 등을 고려하여 예산의 범위에서 법무부장관의 승인을 받아 법률구조법인등의 내부규정으로 정한 자' 로 다시 위임한다.\n\n즉 125% 는 **법령이 아니라 공단 내부규정**이다. 3층 기준상 🟢 이 될 수 없으므로 이 항목은 needs_check 로 고정된다. 지금 문구('기준이 있다' 까지만 말하고 전화로 보낸다)가 정확한 상태다. **찾았는데 없더라도 그건 답이다.**"
+      }
+    },
+    {
+      "id": "fss_1332",
+      "priority": false,
+      "label": "불법사금융·대출사기·보이스피싱",
+      "org": "금융감독원",
+      "phone": "1332",
+      "note": "3번 선택. 채무자대리인(빚 독촉을 대신 상대해 주는 사람) 무료지원 신청 가능",
+      "verification": {
+        "status": "verified",
+        "source": "금융감독원",
+        "sourceUrl": "https://www.fss.or.kr/fss/s1332/s1332Index/sub.do?menuNo=200037",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "moel_1350",
+      "priority": false,
+      "label": "고용노동 상담",
+      "org": "고용노동부 고객상담센터",
+      "phone": "1350",
+      "note": "국번없이 1350. 평일 09:00~18:00",
+      "verification": {
+        "status": "needs_check",
+        "source": "고용노동부 고객상담센터",
+        "checkedAt": "2026-08-16",
+        "checkedBy": "self",
+        "note": "번호(1350)와 운영시간은 공식 안내로 확인. 그러나 **무엇을 상담해 주는지는 미확인** — 공식 안내에는 실업급여·근로기준·산업안전만 적혀 있고 임금체불이 명시돼 있지 않다. 근로기준 영역이라 될 가능성이 높지만 확인 전까지 label 에 '임금체불' 을 쓰지 않는다. 상담과 신고(진정)가 다른 창구인지도 확인 대상."
+      }
+    },
+    {
+      "id": "hug_1588",
+      "priority": false,
+      "label": "전세보증보험",
+      "org": "주택도시보증공사",
+      "phone": "1588-1663",
+      "note": "평일 09:00~18:00",
+      "verification": {
+        "status": "needs_check",
+        "source": "주택도시보증공사",
+        "checkedAt": "2026-08-16",
+        "checkedBy": "self",
+        "note": "번호는 공식 페이지에서 확인. 보증 가입자만 상담 가능한지, 미가입자도 전세피해 상담을 받을 수 있는지 미확인."
+      }
+    },
+    {
+      "id": "hug_1533",
+      "priority": false,
+      "label": "전세보증보험 관리",
+      "org": "주택도시보증공사",
+      "phone": "1533-8119",
+      "verification": {
+        "status": "needs_check",
+        "source": "주택도시보증공사",
+        "checkedAt": "2026-08-16",
+        "checkedBy": "self",
+        "note": "번호는 공식 페이지에서 확인. 1588-1663 과 역할이 어떻게 나뉘는지 미확인."
+      }
+    },
+    {
+      "id": "kinfa_1397",
+      "priority": false,
+      "label": "서민 정책금융 상담",
+      "org": "서민금융진흥원",
+      "phone": "1397",
+      "url": "https://www.kinfa.or.kr",
+      "note": "평일 09:00~20:00",
+      "verification": {
+        "status": "verified",
+        "source": "2차 출처 다수 일치",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "helplaw24",
+      "priority": false,
+      "label": "법률구조 통합 창구",
+      "org": "법률구조서비스 통합시스템",
+      "phone": "1661-3119",
+      "url": "https://www.helplaw24.go.kr",
+      "note": "2026.1.21. 개통. 35개 기관 통합",
+      "verification": {
+        "status": "verified",
+        "source": "법조신문 / 법률신문",
+        "sourceUrl": "https://www.helplaw24.go.kr/plt/intr",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "police_112",
+      "priority": false,
+      "label": "지금 돈을 보냈다 / 범죄가 진행 중이다",
+      "org": "경찰",
+      "phone": "112",
+      "verification": {
+        "status": "verified",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    }
+  ],
+  "autoTriggers": [
+    {
+      "id": "trg_mental",
+      "priority": true,
+      "patterns": [
+        "죽고 싶",
+        "죽고싶",
+        "살기 싫",
+        "죽어버리",
+        "자살하",
+        "자살할",
+        "자살 생각",
+        "자살생각",
+        "자살시도",
+        "극단적 선택"
+      ],
+      "exceptPatterns": [
+        "자살예방",
+        "자살률"
+      ],
+      "show": [
+        "crisis_mental"
+      ],
+      "note": "priority=true 이면 다른 모든 화면을 덮고 최우선 표시. 앱은 해석하지 않고 낱말만 본다. 한 낱말짜리 패턴(자살·극단적)은 오탐이 커서 뺐다.",
+      "tests": [
+        {
+          "text": "돈 때문에 죽고 싶습니다",
+          "expected": true
+        },
+        {
+          "text": "죽고싶어요",
+          "expected": true
+        },
+        {
+          "text": "자살하고 싶어요",
+          "expected": true
+        },
+        {
+          "text": "자살 생각이 자주 납니다",
+          "expected": true
+        },
+        {
+          "text": "혼자살고 있는데 죽고싶어요",
+          "expected": true
+        },
+        {
+          "text": "혼자살고있어요",
+          "expected": false
+        },
+        {
+          "text": "자살예방 캠페인에서 봤어요",
+          "expected": false
+        },
+        {
+          "text": "자살률 통계를 봤습니다",
+          "expected": false
+        },
+        {
+          "text": "극단적인 조건의 계약이었어요",
+          "expected": false
+        }
+      ]
+    },
+    {
+      "id": "trg_gambling",
+      "priority": false,
+      "patterns": [
+        "도박에 빠",
+        "도박으로",
+        "도박 때문",
+        "도박 빚",
+        "도박을 끊",
+        "도박했",
+        "베팅했",
+        "베팅을 하",
+        "스포츠토토",
+        "토토 사이트",
+        "슬롯머신",
+        "바카라",
+        "홀덤",
+        "카지노에서",
+        "카지노에 빠",
+        "카지노 도박"
+      ],
+      "show": [
+        "crisis_gambling",
+        "crisis_debt"
+      ],
+      "tests": [
+        {
+          "text": "도박 때문에 돈을 빌렸어요",
+          "expected": true
+        },
+        {
+          "text": "도박에 빠져서 다 잃었습니다",
+          "expected": true
+        },
+        {
+          "text": "카지노에서 다 잃었어요",
+          "expected": true
+        },
+        {
+          "text": "스포츠토토에 빠졌어요",
+          "expected": true
+        },
+        {
+          "text": "토토로 만화 봤어요",
+          "expected": false
+        },
+        {
+          "text": "카지노 근처 호텔에서 일해요",
+          "expected": false
+        },
+        {
+          "text": "화면 슬롯이 비어 있어요",
+          "expected": false
+        },
+        {
+          "text": "도박은 한 적 없습니다",
+          "expected": false
+        }
+      ]
+    },
+    {
+      "id": "trg_drug",
+      "priority": false,
+      "patterns": [
+        "마약을 하",
+        "마약에 손",
+        "마약 때문",
+        "마약했",
+        "마약 중독",
+        "필로폰",
+        "엑스터시",
+        "대마초를 피",
+        "대마초를 했",
+        "대마 흡"
+      ],
+      "show": [
+        "crisis_drug"
+      ],
+      "note": "마약김밥·마약떡볶이 같은 음식 이름이 흔해서 한 낱말짜리 패턴을 쓸 수 없다.",
+      "tests": [
+        {
+          "text": "마약 때문에 돈이 필요했습니다",
+          "expected": true
+        },
+        {
+          "text": "마약에 손을 댔습니다",
+          "expected": true
+        },
+        {
+          "text": "대마초를 피웠습니다",
+          "expected": true
+        },
+        {
+          "text": "마약김밥 가게를 합니다",
+          "expected": false
+        },
+        {
+          "text": "대마초는 안 했어요",
+          "expected": false
+        },
+        {
+          "text": "마약 수사 뉴스를 봤어요",
+          "expected": false
+        }
+      ]
+    },
+    {
+      "id": "trg_money_crisis",
+      "priority": false,
+      "patterns": [
+        "돈이 없어서",
+        "돈이 하나도 없",
+        "돈이 한 푼도 없",
+        "먹을 게 없",
+        "먹을 것이 없",
+        "쫓겨났",
+        "쫓겨나",
+        "노숙 중",
+        "노숙하고",
+        "노숙 생활",
+        "굶고 있",
+        "굶었",
+        "굶는"
+      ],
+      "show": [
+        "crisis_welfare",
+        "crisis_debt"
+      ],
+      "tests": [
+        {
+          "text": "돈이 없어서 굶고 있습니다",
+          "expected": true
+        },
+        {
+          "text": "집에서 쫓겨났습니다",
+          "expected": true
+        },
+        {
+          "text": "지금 노숙 중입니다",
+          "expected": true
+        },
+        {
+          "text": "월급이 밀려서 돈이 없다고 들었어요",
+          "expected": false
+        },
+        {
+          "text": "굶주린 적은 없어요",
+          "expected": false
+        },
+        {
+          "text": "집에서 쫓겨난 적 없어요",
+          "expected": false
+        },
+        {
+          "text": "노숙인 지원 봉사를 합니다",
+          "expected": false
+        }
+      ]
+    },
+    {
+      "id": "trg_illegal_loan",
+      "priority": false,
+      "patterns": [
+        "사채를 썼",
+        "사채 빚",
+        "사채업자",
+        "사채를 빌",
+        "일수 대출",
+        "일수 찍",
+        "일수쟁이",
+        "일수돈",
+        "불법추심",
+        "불법 추심",
+        "협박당",
+        "협박을 받",
+        "협박 전화",
+        "집으로 찾아온다고"
+      ],
+      "show": [
+        "fss_1332",
+        "klac_132"
+      ],
+      "note": "사채(社債)는 회사가 발행하는 채권이기도 하고, 일수는 날짜를 세는 말이기도 하다. 빚을 다루는 앱에서 둘 다 한 낱말로 쓸 수 없다.",
+      "tests": [
+        {
+          "text": "사채를 썼는데 갚기 어렵습니다",
+          "expected": true
+        },
+        {
+          "text": "일수 대출을 받았습니다",
+          "expected": true
+        },
+        {
+          "text": "협박당하고 있습니다",
+          "expected": true
+        },
+        {
+          "text": "집으로 찾아온다고 합니다",
+          "expected": true
+        },
+        {
+          "text": "대출 일수가 30일이에요",
+          "expected": false
+        },
+        {
+          "text": "근무일수를 계산해주세요",
+          "expected": false
+        },
+        {
+          "text": "협박한 적은 없습니다",
+          "expected": false
+        },
+        {
+          "text": "회사채 이자를 계산해주세요",
+          "expected": false
+        }
+      ]
+    }
+  ],
+  "cautions": [
+    {
+      "id": "ct_legal_aid",
+      "display": "inline",
+      "question": "이 돈을 지금 안 내는 길이 있어요",
+      "condition": "소송비용을 내기 어려우시면",
+      "consequence": "법원에 소송구조를 신청할 수 있다고 법에 있어요. 되면 재판비용을 나중으로 미룰 수 있어요 — 안 내는 것이 아니라 미루는 것이고, 이기면 상대가 내게 될 수도 있어요. 신청은 서면으로 하고, 나와 같이 사는 가족의 자금능력을 적은 서면을 붙여요. 나중에 형편이 나아지면 법원에 알려야 해요. 아래 창구에서 무료로 도와드려요.",
+      "channels": [
+        "klac_132"
+      ],
+      "legalBasis": {
+        "law": "민사소송법",
+        "article": "제128조 제1항",
+        "text": "법원은 소송비용을 지출할 자금능력이 부족한 사람의 신청에 따라 또는 직권으로 소송구조(訴訟救助)를 할 수 있다. 다만, 패소할 것이 분명한 경우에는 그러하지 아니하다.",
+        "url": "https://www.law.go.kr"
+      },
+      "alsoBasis": [
+        {
+          "law": "민사소송법",
+          "article": "제129조 제1항",
+          "text": "소송과 강제집행에 대한 소송구조의 범위는 다음 각호와 같다. 다만, 법원은 상당한 이유가 있는 때에는 다음 각호 가운데 일부에 대한 소송구조를 할 수 있다. 1. 재판비용의 납입유예 2. 변호사 및 집행관의 보수와 체당금(替當金)의 지급유예 3. 소송비용의 담보면제 4. 대법원규칙이 정하는 그 밖의 비용의 유예나 면제",
+          "url": "https://www.law.go.kr"
+        },
+        {
+          "law": "민사소송법",
+          "article": "제132조 제1항",
+          "text": "소송구조를 받은 사람에게 납입을 미루어 둔 비용은 그 부담의 재판을 받은 상대방으로부터 직접 지급받을 수 있다.",
+          "url": "https://www.law.go.kr"
+        },
+        {
+          "law": "민사소송규칙",
+          "article": "제24조",
+          "text": "①법 제128조제1항의 규정에 따른 소송구조신청은 서면으로 하여야 한다. ②제1항의 신청서에는 신청인 및 그와 같이 사는 가족의 자금능력을 적은 서면을 붙여야 한다.",
+          "url": "https://www.law.go.kr"
+        },
+        {
+          "law": "민사소송규칙",
+          "article": "제27조 제2항",
+          "text": "소송구조를 받은 사람이 자금능력이 있게 된 때에는 구조결정을 한 법원에 그 사실을 신고하여야 한다. 다만, 제1항의 기간이 지난 때에는 그러하지 아니하다.",
+          "url": "https://www.law.go.kr"
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "source": "민사소송법(법률 제19516호, 2025.7.12. 시행) 제128조 제1항 · 제129조 제1항 · 제132조 제1항 / 민사소송규칙(대법원규칙 제3239호, 2026.3.1. 시행) 제24조 · 제27조 제2항",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-19",
+        "checkedBy": "self",
+        "openPart": "소송구조 신청 자체의 비용 — 미확인",
+        "askThis": "소송구조를 신청하는 데 돈이 드나요?",
+        "note": "**★ 「면제」가 아니라 「유예」다.** 제129조 제1항 제1호가 「재판비용의 **납입유예**」다. 미루는 것이고, 제132조 제1항이 나중에 상대에게서 받을 수 있다고 정하고, 규칙 제27조 제2항은 형편이 나아지면 **신고 의무**까지 둔다.\n\n면제는 제3호(담보면제)뿐인데 우리 화면의 인지대·송달료는 제1호(재판비용)다. 섞으면 「안 내도 된다」가 되고, 그건 틀린 문장이다(DECISIONS 133번).\n\n**제128조 제1항 단서(「패소할 것이 분명한 경우」)를 원문에 그대로 싣되 풀지 않는다.** 우리는 승패를 말하지 않는다. 조문에 그렇게 쓰여 있다는 것까지가 우리 몫이다.\n\n**자금능력 기준을 숫자로 말하지 않는다.** 조문에 없다 — 제128조 제5항이 대법원규칙으로 넘긴다.\n\n신청 자체에 돈이 드는지는 모른다. 인지법 제9조 목록에 없지만 **「목록에 없으니 안 든다」는 근거가 되지 못한다**(DECISIONS 125번). 화면에서는 아무 말도 하지 않는다."
+      }
+    }
+  ],
+  "hardStops": [
+    {
+      "id": "hs_criminal",
+      "trigger": {
+        "type": "keyword",
+        "patterns": [
+          "고소하려",
+          "고소할",
+          "고소장",
+          "고소당",
+          "고소를 하",
+          "형사 사건",
+          "형사 고발",
+          "형사처벌",
+          "형사 재판",
+          "사기죄",
+          "경찰서에서 연락",
+          "경찰 조사",
+          "경찰에 신고",
+          "검찰 조사",
+          "검찰에 송치",
+          "검찰청에서",
+          "구속영장",
+          "구속됐",
+          "구속 수사",
+          "송치됐",
+          "송치 예정",
+          "피의자로",
+          "피의자 신분",
+          "도박장을 운영"
+        ]
+      },
+      "screen": "hardstop_criminal",
+      "tests": [
+        {
+          "text": "사기죄로 고소하려고 합니다",
+          "expected": true
+        },
+        {
+          "text": "고소장을 접수했습니다",
+          "expected": true
+        },
+        {
+          "text": "형사 사건으로 번졌어요",
+          "expected": true
+        },
+        {
+          "text": "경찰 조사를 받았습니다",
+          "expected": true
+        },
+        {
+          "text": "참기름이 고소한 냄새가 납니다",
+          "expected": false
+        },
+        {
+          "text": "형사 드라마를 봤어요",
+          "expected": false
+        },
+        {
+          "text": "계약에 구속력이 있나요",
+          "expected": false
+        },
+        {
+          "text": "고소할 생각은 없습니다",
+          "expected": false
+        },
+        {
+          "text": "검찰 개혁 뉴스를 봤어요",
+          "expected": false
+        },
+        {
+          "text": "조사받은 적 없습니다",
+          "expected": false
+        }
+      ],
+      "title": "형사 사건은 다루지 않습니다",
+      "message": "잘 모르는 분야에 대해 그럴듯한 답을 만들어 드리는 것이 가장 위험하다고 생각합니다. 그래서 여기서 멈춥니다.",
+      "channels": [
+        "klac_132",
+        "helplaw24"
+      ]
+    },
+    {
+      "id": "hs_family",
+      "trigger": {
+        "type": "keyword",
+        "patterns": [
+          "이혼하",
+          "이혼 소송",
+          "이혼했",
+          "이혼을",
+          "양육권",
+          "친권"
+        ]
+      },
+      "screen": "hardstop_out_of_scope_family",
+      "tests": [
+        {
+          "text": "이혼 소송 중입니다",
+          "expected": true
+        },
+        {
+          "text": "양육권 문제가 있습니다",
+          "expected": true
+        },
+        {
+          "text": "이혼율 기사를 봤어요",
+          "expected": false
+        },
+        {
+          "text": "이혼할 생각은 없습니다",
+          "expected": false
+        },
+        {
+          "text": "상속재산분할을 하려고 합니다",
+          "expected": false
+        },
+        {
+          "text": "형제들끼리 유산을 나누는 문제입니다",
+          "expected": false
+        },
+        {
+          "text": "유류분을 청구하려고 합니다",
+          "expected": false
+        }
+      ],
+      "title": "아직 다루지 못하는 사건입니다",
+      "channels": [
+        "klac_132",
+        "helplaw24"
+      ],
+      "message": "이 부분은 저희가 아직 준비하지 못했어요. 법이 정한 절차를 아직 다 확인하지 못했어요."
+    },
+    {
+      "id": "hs_inheritance_share",
+      "trigger": {
+        "type": "keyword",
+        "patterns": [
+          "유류분"
+        ]
+      },
+      "screen": "hardstop_out_of_scope_inheritance",
+      "tests": [
+        {
+          "text": "유류분을 청구하려고 합니다",
+          "expected": true
+        },
+        {
+          "text": "유류분 반환청구를 하고 싶어요",
+          "expected": true
+        },
+        {
+          "text": "상속재산분할을 하려고 합니다",
+          "expected": false
+        },
+        {
+          "text": "형제들끼리 유산을 나누는 문제입니다",
+          "expected": false
+        },
+        {
+          "text": "이혼 소송 중입니다",
+          "expected": false
+        }
+      ],
+      "title": "아직 다루지 못하는 사건입니다",
+      "message": "이 부분은 저희가 아직 준비하지 못했어요. 법이 정한 절차를 아직 다 확인하지 못했어요.\n\n상속받은 재산을 어떻게 나눌지는 지금 보실 수 있어요. 처음 화면에 「상속재산 나누기」가 있어요. 같은 일은 아니에요.",
+      "channels": [
+        "klac_132",
+        "helplaw24"
+      ]
+    }
+  ],
+  "lookupTools": [
+    {
+      "id": "lt_lender",
+      "label": "등록 대부업체 조회",
+      "org": "금융감독원 파인",
+      "url": "https://fines.fss.or.kr/fines/plis/moneyLenderSearch/MoneyLenderSearch.getMoneyLenderList.do",
+      "hint": "받은 전화번호로 역조회하세요. 등록업체의 광고용 전화번호와 다르면 사칭입니다.",
+      "verification": {
+        "status": "verified",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "lt_police_fraud",
+      "label": "사이버사기 피해신고 이력조회",
+      "org": "경찰청",
+      "url": "https://www.police.go.kr/www/security/cyber/cyber04.jsp",
+      "hint": "계좌번호·전화번호로 신고 이력을 확인할 수 있습니다.",
+      "verification": {
+        "status": "verified",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "lt_msafer",
+      "label": "내 명의로 개통된 휴대폰 조회",
+      "org": "명의도용방지서비스",
+      "url": "https://www.msafer.or.kr",
+      "hint": "내가 모르는 휴대폰이 개통돼 있는지 확인하세요.",
+      "verification": {
+        "status": "verified",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "lt_payinfo",
+      "label": "내 명의 계좌·대출 전체 조회",
+      "org": "계좌정보통합관리서비스",
+      "url": "https://www.payinfo.or.kr",
+      "hint": "내가 모르는 계좌나 대출이 있는지 확인하세요.",
+      "verification": {
+        "status": "verified",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "lt_lawyer",
+      "label": "변호사 자격 조회",
+      "org": "대한변호사협회",
+      "url": "https://koreanbar.or.kr/pages/search/search1.asp",
+      "verification": {
+        "status": "verified",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "lt_bl",
+      "label": "법무사 자격 조회",
+      "org": "대한법무사협회",
+      "url": "https://memberr.kabl.kr/mod/page/view.do?MID=member_lawm_search",
+      "verification": {
+        "status": "verified",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "lt_realtor",
+      "label": "공인중개사무소 등록 조회",
+      "org": "한국공인중개사협회",
+      "url": "https://www.kar.or.kr",
+      "verification": {
+        "status": "verified",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    }
+  ],
+  "phoneRiskRules": [
+    {
+      "id": "pr_internet",
+      "match": "^(070|050)",
+      "flag": "internetPhone",
+      "message": "인터넷전화 번호입니다. 금융회사·공공기관 사칭에 자주 쓰입니다."
+    },
+    {
+      "id": "pr_intl",
+      "match": "^\\+(?!82)",
+      "flag": "international",
+      "message": "국제전화 번호입니다. 국내 금융회사는 국제번호로 전화하지 않습니다."
+    },
+    {
+      "id": "pr_personal",
+      "match": "^01[016789]",
+      "flag": "personalMobile",
+      "context": [
+        "loan",
+        "debt_relief"
+      ],
+      "message": "개인 휴대전화 번호입니다. 정식 금융회사·공공기관은 대표번호를 사용합니다."
+    }
+  ],
+  "brokerAlerts": [
+    {
+      "id": "ba_upfront_fee",
+      "severity": "red",
+      "phrase": "중개수수료 · 착수금 · 사례금을 먼저 보내주세요",
+      "truth": "대출 중개인이 소비자에게 돈을 요구하는 것은 금액과 명칭에 관계없이 불법입니다.",
+      "triggers": [
+        "착수금을 먼저",
+        "착수금 먼저",
+        "중개수수료를 먼저",
+        "중개수수료 먼저",
+        "사례금을 먼저",
+        "사례금 먼저",
+        "수수료를 먼저 보내",
+        "수수료 먼저 보내",
+        "수수료를 먼저 입금",
+        "수수료 먼저 입금"
+      ],
+      "tests": [
+        {
+          "text": "착수금 먼저 보내라고 하는데요",
+          "expected": true
+        },
+        {
+          "text": "중개수수료를 먼저 달래요",
+          "expected": true
+        },
+        {
+          "text": "수수료를 먼저 입금하라고 합니다",
+          "expected": true
+        },
+        {
+          "text": "변호사 착수금이 얼마나 드나요",
+          "expected": false
+        },
+        {
+          "text": "부동산 중개수수료는 누가 내나요",
+          "expected": false
+        },
+        {
+          "text": "물건값을 선입금했는데 안 보내줘요",
+          "expected": false
+        },
+        {
+          "text": "착수금을 먼저 달라고 한 적 없어요",
+          "expected": false
+        }
+      ],
+      "legalBasis": {
+        "law": "대부업법",
+        "article": "제11조의2 제2항",
+        "text": "대부중개업자 및 대출모집인(이하 \"대부중개업자등\"이라 한다)과 불법사금융중개업자는 수수료, 사례금, 착수금 등 그 명칭이 무엇이든 대부중개와 관련하여 받는 대가(이하 \"중개수수료\"라 한다)를 대부를 받는 거래상대방으로부터 받아서는 아니 된다.",
+        "url": "https://www.law.go.kr"
+      },
+      "alsoBasis": [
+        {
+          "law": "대부업법",
+          "article": "제19조 제4항 제6호",
+          "text": "④ 다음 각 호의 어느 하나에 해당하는 자는 3년 이하의 징역 또는 3천만원 이하의 벌금에 처한다. 6. 제11조의2제1항 또는 제2항을 위반하여 대부중개를 하거나 중개수수료를 받은 자",
+          "url": "https://www.law.go.kr"
+        }
+      ],
+      "action": {
+        "label": "금감원에 신고",
+        "phone": "1332"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "대부업 등의 등록 및 금융이용자 보호에 관한 법률(법률 제21065호, 2026.1.2. 시행) 제11조의2 제2항 · 제19조 제4항 제6호 — 1차 원문 대조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-18",
+        "checkedBy": "self",
+        "note": "**두 번 틀렸다.**\n\n① 조문 번호. 「제19조 **제2항** 제6호」로 적고 있었는데 제2항에는 5호까지밖에 없다. 맞는 것은 **제19조 제4항 제6호**다.\n\n② 원문. text 끝에 '위반 시 3년 이하의 징역 또는 3천만원 이하의 벌금.' 이 우리 요약으로 붙어 있어 내렸는데([83번](DECISIONS.md)), 남은 부분도 원문이 아니었다 — 「대부중개업자 등은 그 명칭이 무엇이든…」은 줄인 말이고 조문은 「대부중개업자 및 대출모집인…과 불법사금융중개업자는 수수료, 사례금, 착수금 등 그 명칭이 무엇이든…」이다. **의역이 ~한다 체이면 검사가 못 잡는다** — 83번의 검사가 스스로 밝힌 한계가 그대로 드러났다.\n\n**상한이 아니라 금지다.** 제2항은 대출받는 사람에게서 중개수수료를 받는 것 **자체**를 금지한다. 제3항의 5% 상한은 대부업자가 중개업자에게 주는 쪽이라 우리 사용자와 상관이 없다 — **여기에 5%를 적으면 「얼마까지는 괜찮다」로 읽힌다.** 적지 않는다."
+      }
+    },
+    {
+      "id": "ba_approval_deposit",
+      "severity": "red",
+      "phrase": "대출 승인이 나려면 먼저 입금하셔야 합니다",
+      "truth": "금융감독원: 대출 승인을 위한 선입금 요구는 100% 사기입니다.",
+      "triggers": [
+        "입금하면 승인",
+        "입금해야 승인",
+        "승인되려면 입금",
+        "보증금을 먼저 입금",
+        "보증금 먼저 입금",
+        "예치금을 먼저 입금",
+        "예치금 먼저 입금"
+      ],
+      "tests": [
+        {
+          "text": "입금하면 승인된다고 해요",
+          "expected": true
+        },
+        {
+          "text": "예치금을 먼저 입금하래요",
+          "expected": true
+        },
+        {
+          "text": "전세보증금을 못 받고 있어요",
+          "expected": false
+        },
+        {
+          "text": "보증금 이천만원을 돌려받아야 해요",
+          "expected": false
+        },
+        {
+          "text": "먼저 입금한 적 없습니다",
+          "expected": false
+        }
+      ],
+      "action": {
+        "label": "금감원에 신고",
+        "phone": "1332"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "금감원 2025.5.21 소비자경보",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "ba_app_install",
+      "severity": "red",
+      "phrase": "대출신청서 앱 / 보안 앱을 설치해 주세요",
+      "truth": "금융회사는 대출 과정에서 앱 설치를 요구하지 않습니다. 어떤 명목이든 거절하세요.",
+      "triggers": [
+        "앱을 설치하라",
+        "앱 설치하라",
+        "앱 설치하래",
+        "앱을 설치하래",
+        "보안앱",
+        "보안 앱",
+        "원격 앱",
+        "원격제어",
+        "원격 제어",
+        "원격조종"
+      ],
+      "tests": [
+        {
+          "text": "보안앱을 깔라고 합니다",
+          "expected": true
+        },
+        {
+          "text": "원격제어 앱을 설치하래요",
+          "expected": true
+        },
+        {
+          "text": "전자소송 앱 설치하면 되나요",
+          "expected": false
+        },
+        {
+          "text": "원격으로 일하고 있어요",
+          "expected": false
+        },
+        {
+          "text": "앱을 설치하라고 한 적 없어요",
+          "expected": false
+        }
+      ],
+      "action": {
+        "label": "금감원에 신고",
+        "phone": "1332"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "금감원 2025.5.21 소비자경보",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "ba_notary_account",
+      "severity": "red",
+      "phrase": "기록이 남으면 안 되니 은행 말고 공증계좌로 상환하세요",
+      "truth": "금융감독원이 공개한 보이스피싱 실제 멘트입니다.",
+      "triggers": [
+        "공증계좌",
+        "공증 계좌",
+        "기록이 남으면 안 되",
+        "기록이 남으면 안 된"
+      ],
+      "tests": [
+        {
+          "text": "공증계좌로 보내라고 해요",
+          "expected": true
+        },
+        {
+          "text": "기록이 남으면 안 된다면서 다른 계좌를 알려줬어요",
+          "expected": true
+        },
+        {
+          "text": "기록이 남으면 안 되니 현금으로 달래요",
+          "expected": true
+        },
+        {
+          "text": "계좌이체 기록이 남아 있어요",
+          "expected": false
+        },
+        {
+          "text": "기록이 남으면 증거가 되나요",
+          "expected": false
+        },
+        {
+          "text": "기록이 남으면 안심이 되나요",
+          "expected": false
+        },
+        {
+          "text": "기록이 남으면 안 그래도 좋겠어요",
+          "expected": false
+        }
+      ],
+      "action": {
+        "label": "경찰 신고",
+        "phone": "112"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "금감원 2025.5.21 소비자경보",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "ba_fake_law",
+      "severity": "red",
+      "phrase": "금융거래법 위반으로 지급정지가 등록됐습니다",
+      "truth": "그런 법률과 절차는 존재하지 않습니다. 보이스피싱 정형구입니다.",
+      "triggers": [
+        "금융거래법",
+        "지급정지 등록"
+      ],
+      "exceptTriggers": [
+        "전자금융거래법"
+      ],
+      "tests": [
+        {
+          "text": "금융거래법 위반이라며 지급정지 등록됐대요",
+          "expected": true
+        },
+        {
+          "text": "전자금융거래법 제6조를 봤어요",
+          "expected": false
+        },
+        {
+          "text": "전자금융거래법 위반인지 궁금해요",
+          "expected": false
+        },
+        {
+          "text": "지급정지 등록된 적 없습니다",
+          "expected": false
+        }
+      ],
+      "action": {
+        "label": "경찰 신고",
+        "phone": "112"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "금감원 2025.5.21 소비자경보",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "ba_account_lend",
+      "severity": "red",
+      "display": "stop",
+      "phrase": "통장 · 체크카드 · 비밀번호만 잠깐 빌려주세요",
+      "truth": "잔액이 0원이어도, 대가를 약속받았어도 본인이 처벌받습니다.",
+      "triggers": [
+        "통장 빌려",
+        "통장을 빌려",
+        "체크카드 빌려",
+        "체크카드를 빌려",
+        "체크카드 보내달",
+        "비밀번호 알려",
+        "비밀번호를 알려"
+      ],
+      "tests": [
+        {
+          "text": "통장 빌려주면 돈 준대요",
+          "expected": true
+        },
+        {
+          "text": "체크카드를 빌려달래요",
+          "expected": true
+        },
+        {
+          "text": "체크카드로 이체한 내역이 있어요",
+          "expected": false
+        },
+        {
+          "text": "통장에 입금이 안 됐어요",
+          "expected": false
+        },
+        {
+          "text": "통장 빌려준 적 없어요",
+          "expected": false
+        }
+      ],
+      "legalBasis": {
+        "law": "전자금융거래법",
+        "article": "제49조 제4항",
+        "text": "다음 각 호의 어느 하나에 해당하는 자는 5년 이하의 징역 또는 3천만원 이하의 벌금에 처한다. 1. 제6조제3항제1호를 위반하여 접근매체를 양도하거나 양수한 자 2. 제6조제3항제2호 또는 제3호를 위반하여 접근매체를 대여받거나 대여한 자 또는 보관ㆍ전달ㆍ유통한 자",
+        "url": "https://www.law.go.kr"
+      },
+      "alsoBasis": [
+        {
+          "law": "전자금융거래법",
+          "article": "제6조 제3항",
+          "text": "누구든지 접근매체를 사용 및 관리함에 있어서 다른 법률에 특별한 규정이 없는 한 다음 각 호의 행위를 하여서는 아니 된다. 1. 접근매체를 양도하거나 양수하는 행위 2. 대가를 수수(授受)ㆍ요구 또는 약속하면서 접근매체를 대여받거나 대여하는 행위 또는 보관ㆍ전달ㆍ유통하는 행위 3. 범죄에 이용할 목적으로 또는 범죄에 이용될 것을 알면서 접근매체를 대여받거나 대여하는 행위 또는 보관ㆍ전달ㆍ유통하는 행위 4. 접근매체를 질권의 목적으로 하는 행위 5. 제1호부터 제4호까지의 행위를 알선ㆍ중개ㆍ광고하거나 대가를 수수ㆍ요구 또는 약속하면서 권유하는 행위",
+          "url": "https://www.law.go.kr"
+        }
+      ],
+      "action": {
+        "label": "금감원에 신고",
+        "phone": "1332"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "전자금융거래법(법률 제21205호, 2025.12.16. 시행) 제6조 제3항 · 제49조 제4항 — 1차 원문 대조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-17",
+        "checkedBy": "self",
+        "note": "조문과 형량이 모두 맞아 verified 로 되돌렸다. 금지 조문(제6조 제3항)과 처벌 조문(제49조 제4항)이 따로라 alsoBasis 로 둘 다 단다. 제6조 제3항 제2호가 '대가를 수수·요구 또는 약속하면서' 를 요건으로 두므로 '대가를 약속받았어도 처벌된다' 는 문구는 조문 방향과 같다."
+      }
+    },
+    {
+      "id": "ba_photo_extortion_loan",
+      "severity": "red",
+      "display": "stop",
+      "phrase": "사진 한 장이랑 지인 연락처만 주시면 바로 나갑니다",
+      "truth": "돈을 빌려주면서 몸이 드러난 사진이나 영상을 요구하는 것은, 이자를 얼마로 했든 그 대부계약 전부를 무효로 만듭니다. 원금도 이자도 갚으라고 할 수 없고, 이미 내신 돈은 돌려받으실 수 있습니다. 이미 보내셨더라도 늦지 않았습니다.",
+      "triggers": [
+        "사진 한 장만",
+        "사진 보내주",
+        "사진을 보내주",
+        "영상 보내주",
+        "영상을 보내주",
+        "지인 연락처"
+      ],
+      "tests": [
+        {
+          "text": "사진 한 장만 주면 된대요",
+          "expected": true
+        },
+        {
+          "text": "지인 연락처를 달라고 해요",
+          "expected": true
+        },
+        {
+          "text": "차용증을 사진으로 찍어 뒀어요",
+          "expected": false
+        },
+        {
+          "text": "계좌이체 내역 사진을 갖고 있어요",
+          "expected": false
+        },
+        {
+          "text": "사진 보내준 적 없어요",
+          "expected": false
+        }
+      ],
+      "action": {
+        "label": "경찰 신고",
+        "phone": "112"
+      },
+      "legalBasis": {
+        "law": "대부업법",
+        "article": "제8조의2 제1항",
+        "text": "다음 각 호의 어느 하나에 해당하는 경우 그 대부계약은 무효로 한다. 이 경우 대부업자, 불법사금융업자 또는 여신금융기관(이하 이 조에서 \"대부제공자\"라 한다)은 제8조, 제11조 및 제15조에도 불구하고 거래상대방에게 그 원본의 반환 및 이자의 변제를 청구하지 못하며, 거래상대방이 대부제공자에게 이미 지급한 원본과 이자가 있으면 이를 반환하여야 한다. 1. 대부계약 과정에서 대부제공자가 다음 각 목의 어느 하나의 행위를 거래상대방에게 하거나 거래상대방이 하도록 요구하는 경우 가. 성적 욕망 또는 수치심을 유발할 수 있는 촬영물ㆍ영상물ㆍ음성물 또는 그 편집물ㆍ합성물ㆍ가공물 및 복제물을 요구ㆍ수집ㆍ제공ㆍ유통하는 행위",
+        "url": "https://www.law.go.kr"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "대부업 등의 등록 및 금융이용자 보호에 관한 법률(법률 제21065호, 2026.1.2. 시행) 제8조의2 제1항 제1호 가목 — 1차 원문 대조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-17",
+        "checkedBy": "self",
+        "note": "제8조의2 제1항 제1호~제3호는 **이자율과 무관하게** 계약 전부를 무효로 만든다. 이자 규칙 자리에 두면 '연 60%' 아래에 묻혀 안 보인다. 브로커가 실제로 하는 말로 걸리는 것이라 경보로 옮겼다.\n\n촬영물을 이미 넘긴 사람이 '내가 준 거라 어쩔 수 없다' 고 물러서는 것을 막는 문장을 넣었다. 조문은 요구한 쪽을 보지 넘긴 쪽을 보지 않는다."
+      }
+    },
+    {
+      "id": "ba_body_collateral_loan",
+      "severity": "red",
+      "display": "stop",
+      "phrase": "돈 대신 몸으로 갚으시면 됩니다 / 일자리 소개해 드릴게요",
+      "truth": "돈을 빌려주면서 장기를 내놓게 하거나 강제로 일하게 하는 것도 그 대부계약 전부를 무효로 만듭니다. 이자를 얼마로 했든 상관없습니다. 갚으라고 할 수 없고, 이미 내신 돈은 돌려받으실 수 있습니다.",
+      "triggers": [
+        "몸으로 갚",
+        "장기를 팔",
+        "장기 팔아",
+        "신체포기",
+        "장기 매매"
+      ],
+      "tests": [
+        {
+          "text": "몸으로 갚으라고 합니다",
+          "expected": true
+        },
+        {
+          "text": "신체포기 각서를 쓰라고 해요",
+          "expected": true
+        },
+        {
+          "text": "장기간 못 받고 있어요",
+          "expected": false
+        },
+        {
+          "text": "일해서 갚겠다고 했어요",
+          "expected": false
+        },
+        {
+          "text": "장기 기증 서약을 한 적 있어요",
+          "expected": false
+        }
+      ],
+      "action": {
+        "label": "경찰 신고",
+        "phone": "112"
+      },
+      "legalBasis": {
+        "law": "대부업법",
+        "article": "제8조의2 제1항",
+        "text": "다음 각 호의 어느 하나에 해당하는 경우 그 대부계약은 무효로 한다. … 1. 대부계약 과정에서 대부제공자가 다음 각 목의 어느 하나의 행위를 거래상대방에게 하거나 거래상대방이 하도록 요구하는 경우 나. 인신매매, 신체의 상해 또는 포기, 장기기증, 강제취업, 강제노동 등 개인의 신체와 자유를 심각하게 침해하거나 기타 사회질서에 반하는 행위를 요구하는 행위",
+        "url": "https://www.law.go.kr"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "대부업 등의 등록 및 금융이용자 보호에 관한 법률(법률 제21065호, 2026.1.2. 시행) 제8조의2 제1항 제1호 나목 — 1차 원문 대조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-17",
+        "checkedBy": "self",
+        "note": "제1항 본문은 ba_photo_extortion_loan 에 전문이 있다. 여기서는 나목을 보이려고 본문을 '…' 로 줄였다.\n\n걸림말에서 '장기' 한 낱말은 쓸 수 없다 — 장기간·장기 대출에 걸린다. '일해서 갚' 도 뺐다. 갚으려는 사람이 흔히 쓰는 말이라 엉뚱한 사람에게 빨간 경보가 뜬다."
+      }
+    },
+    {
+      "id": "ba_doc_fabrication",
+      "severity": "orange",
+      "phrase": "서류는 저희가 다 맞춰 드립니다 / 재직증명서 만들어 드려요",
+      "truth": "작업대출입니다. 서류를 꾸미는 일이라 신청한 사람도 처벌될 수 있고, 받은 대출금에서 수수료를 크게 뜯깁니다.",
+      "triggers": [
+        "서류 맞춰 드",
+        "서류를 맞춰 드",
+        "서류 맞춰 준다",
+        "서류 맞춰 준대",
+        "서류 맞춰 줄게",
+        "서류 맞춰 줍니",
+        "서류를 맞춰 준다",
+        "서류 맞춰줄",
+        "재직증명 만들어",
+        "재직증명서 만들어",
+        "소득 만들어",
+        "소득증명 만들어"
+      ],
+      "tests": [
+        {
+          "text": "재직증명 만들어 준다고 해요",
+          "expected": true
+        },
+        {
+          "text": "서류 맞춰 드린다고 합니다",
+          "expected": true
+        },
+        {
+          "text": "서류 맞춰 드려요라고 문자가 왔어요",
+          "expected": true
+        },
+        {
+          "text": "서류 맞춰 준다고 하는데 괜찮나요",
+          "expected": true
+        },
+        {
+          "text": "필요한 서류를 맞춰서 준비하려고요",
+          "expected": false
+        },
+        {
+          "text": "서류 맞춰 준비하는 데 얼마나 걸리나요",
+          "expected": false
+        },
+        {
+          "text": "서류 맞춰 주말까지 내려고 해요",
+          "expected": false
+        },
+        {
+          "text": "소득 증빙을 어떻게 만드나요",
+          "expected": false
+        },
+        {
+          "text": "서류 맞춰 준다고 한 적 없어요",
+          "expected": false
+        }
+      ],
+      "legalBasis": {
+        "law": "형법",
+        "article": "제231조",
+        "text": "행사할 목적으로 권리ㆍ의무 또는 사실증명에 관한 타인의 문서 또는 도화를 위조 또는 변조한 자는 5년 이하의 징역 또는 1천만원 이하의 벌금에 처한다.",
+        "url": "https://www.law.go.kr"
+      },
+      "alsoBasis": [
+        {
+          "law": "형법",
+          "article": "제347조 제1항",
+          "text": "사람을 기망하여 재물의 교부를 받거나 재산상의 이익을 취득한 자는 20년 이하의 징역 또는 5천만원 이하의 벌금에 처한다.",
+          "url": "https://www.law.go.kr"
+        }
+      ],
+      "action": {
+        "label": "금감원에 신고",
+        "phone": "1332"
+      },
+      "verification": {
+        "status": "needs_check",
+        "source": "형법(법률 제21450호, 2026.3.12. 시행) 제231조 · 제347조 제1항 — 1차 원문 대조 / 금감원 소비자경보",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-17",
+        "checkedBy": "self",
+        "note": "조문 원문을 받아 legalBasis 를 다시 붙였다. 사기죄 형량이 개정으로 바뀌었다 — 10년·2천만원이 아니라 **20년 이하의 징역 또는 5천만원 이하의 벌금**이다(2025.12.23. 개정, 2026.3.12. 시행). 기억에 있는 숫자를 쓰지 않는다.\n\n**needs_check 로 남긴 이유는 조문이 아니라 문장이다.** '신청자도 공범으로 처벌된다' 는 공범이 성립하는지를 따지는 판단이라 조문만으로 단정할 수 없다. '처벌될 수 있습니다' 로 낮췄고, 그 부분은 열어 둔다. 30% 수수료는 금감원 소비자경보의 2차 출처다."
+      }
+    },
+    {
+      "id": "ba_phone_tech",
+      "severity": "orange",
+      "phrase": "휴대폰만 개통해 주면 현금 드립니다 / 폰테크",
+      "truth": "내구제대출입니다. 본인이 전기통신사업법 위반으로 처벌될 수 있고, 받은 현금보다 훨씬 큰 금액이 본인 앞으로 청구됩니다.",
+      "triggers": [
+        "폰테크",
+        "휴대폰 개통",
+        "핸드폰 개통",
+        "내구제"
+      ],
+      "tests": [
+        {
+          "text": "폰테크 하면 된다고 해요",
+          "expected": true
+        },
+        {
+          "text": "휴대폰 개통해 주면 돈 준대요",
+          "expected": true
+        },
+        {
+          "text": "휴대폰으로 문자 보냈어요",
+          "expected": false
+        },
+        {
+          "text": "휴대폰 개통한 적 없습니다",
+          "expected": false
+        }
+      ],
+      "legalBasis": {
+        "law": "전기통신사업법",
+        "article": "제97조 제7호",
+        "text": "다음 각 호의 어느 하나에 해당하는 자는 1년 이하의 징역 또는 5천만원 이하의 벌금에 처한다. 7. 제30조 각 호 외의 부분 본문을 위반하여 전기통신사업자가 제공하는 전기통신역무를 이용하여 타인의 통신을 매개하거나 이를 타인의 통신용으로 제공한 자",
+        "url": "https://www.law.go.kr"
+      },
+      "alsoBasis": [
+        {
+          "law": "전기통신사업법",
+          "article": "제30조",
+          "text": "누구든지 전기통신사업자가 제공하는 전기통신역무를 이용하여 타인의 통신을 매개하거나 이를 타인의 통신용으로 제공하여서는 아니 된다. 다만, … 4. 이용자가 제3자에게 반복적이지 아니한 정도로 사용하도록 하는 경우",
+          "url": "https://www.law.go.kr"
+        }
+      ],
+      "action": {
+        "label": "금감원에 신고",
+        "phone": "1332"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "전기통신사업법(법률 제21652호, 2026.5.19. 시행) 제30조 · 제97조 제7호 — 1차 원문 대조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-17",
+        "checkedBy": "self",
+        "note": "조문과 형량이 맞아 legalBasis 를 붙이고 verified 로 올렸다. 다만 **제30조에 단서가 있다** — 각 호에 해당하면 금지가 아니고, 제4호는 '반복적이지 아니한 정도' 를 뺀다. 그래서 '처벌된다' 를 '처벌될 수 있습니다' 로 낮췄다. 단서 전문과 제1호~제3호는 아직 못 받아 alsoBasis 의 text 에 '…' 로 남겼다."
+      }
+    },
+    {
+      "id": "ba_high_pay_errand",
+      "severity": "orange",
+      "phrase": "심부름만 하면 일당 30~50만원 드립니다",
+      "truth": "금융감독원이 보이스피싱 현금 수거책 모집 수법으로 알린 문구입니다. 아래 창구에서 확인해 보세요.",
+      "triggers": [
+        "고액 알바",
+        "고액알바",
+        "고액 심부름",
+        "단순 심부름",
+        "심부름 알바",
+        "돈 전달 알바"
+      ],
+      "tests": [
+        {
+          "text": "고액 알바를 소개해 준대요",
+          "expected": true
+        },
+        {
+          "text": "단순 심부름만 하면 된다고 해요",
+          "expected": true
+        },
+        {
+          "text": "심부름 값을 아직 못 받았어요",
+          "expected": false
+        },
+        {
+          "text": "일당 삼십만원 받기로 했는데 안 줘요",
+          "expected": false
+        },
+        {
+          "text": "고액 알바를 한 적 없어요",
+          "expected": false
+        }
+      ],
+      "action": {
+        "label": "금감원에 신고",
+        "phone": "1332"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "금감원·알바천국 취업사기 예방 가이드",
+        "checkedAt": "2026-08-18",
+        "checkedBy": "self",
+        "note": "'보이스피싱 현금 수거책 모집입니다' 는 단정이었다. 고액 알바 광고가 전부 수거책 모집인지는 우리가 판정할 수 없다. 출처가 있으므로 **그 출처가 그렇게 알렸다** 는 인용 형태로 낮췄다 — ba_notary_account 와 같은 틀이다. 조문이 없어 형벌은 말하지 않는다. 창구를 붙였다."
+      }
+    },
+    {
+      "id": "ba_ccrs_fee",
+      "severity": "yellow",
+      "phrase": "채무조정 진행해 드릴게요, 수수료는 ○○○만원입니다",
+      "truth": "신용회복위원회 채무조정 신청비는 5만원이고 그 외 추가비용은 없습니다. 직접 신청할 수 있습니다.",
+      "triggers": [
+        "채무조정 대행",
+        "신복위 대행",
+        "워크아웃 대행"
+      ],
+      "tests": [
+        {
+          "text": "채무조정 대행해 준다고 수수료를 달래요",
+          "expected": true
+        },
+        {
+          "text": "워크아웃 대행 업체를 알아봤어요",
+          "expected": true
+        },
+        {
+          "text": "신용회복위원회에 직접 신청했어요",
+          "expected": false
+        },
+        {
+          "text": "채무조정을 대행한 적 없어요",
+          "expected": false
+        }
+      ],
+      "action": {
+        "label": "직접 신청하기",
+        "phone": "1600-5500",
+        "url": "https://www.ccrs.or.kr"
+      },
+      "notice": {
+        "agency": "신용회복위원회",
+        "checkedAt": "2026-08-18",
+        "dateScope": "visited",
+        "dataset": "신용회복위원회 채무조정 안내"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "신용회복위원회 공식 안내",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    },
+    {
+      "id": "ba_credit_erase",
+      "severity": "blue",
+      "phrase": "연체기록 지워 드립니다 / 신용점수 올려 드립니다",
+      "truth": "사실과 다른 기록은 본인이 직접 정정을 청구할 수 있어요. 처리 결과는 7일 안에 알려주게 되어 있고, 결과에 이의가 있으면 금융위원회에 시정을 요청할 수 있어요. 지워지는 것은 사실과 다르거나 확인할 수 없는 기록뿐이에요. 사실 그대로인 기록은 돈을 줘도 지워지지 않아요. 언제 지워지는지도 법이 정해 두었어요.",
+      "triggers": [
+        "연체기록 삭제",
+        "연체 기록 삭제",
+        "신용등급 올려",
+        "신용점수 올려"
+      ],
+      "tests": [
+        {
+          "text": "연체기록 삭제해 준다고 해요",
+          "expected": true
+        },
+        {
+          "text": "신용등급 올려 준다는 광고를 봤어요",
+          "expected": true
+        },
+        {
+          "text": "신용등급이 떨어졌어요",
+          "expected": false
+        },
+        {
+          "text": "신용점수 올려준다고 한 적 없어요",
+          "expected": false
+        }
+      ],
+      "legalBasis": {
+        "law": "신용정보의 이용 및 보호에 관한 법률",
+        "article": "제38조 제2항",
+        "text": "제1항에 따라 자신의 신용정보를 열람한 신용정보주체는 본인 신용정보가 사실과 다른 경우에는 금융위원회가 정하여 고시하는 바에 따라 정정을 청구할 수 있다.",
+        "url": "https://www.law.go.kr"
+      },
+      "alsoBasis": [
+        {
+          "law": "신용정보의 이용 및 보호에 관한 법률",
+          "article": "제38조 제3항",
+          "text": "제2항에 따라 정정청구를 받은 신용정보회사등은 정정청구에 정당한 사유가 있다고 인정하면 지체 없이 해당 신용정보의 제공ㆍ이용을 중단한 후 사실인지를 조사하여 사실과 다르거나 확인할 수 없는 신용정보는 삭제하거나 정정하여야 한다.",
+          "url": "https://www.law.go.kr"
+        },
+        {
+          "law": "신용정보의 이용 및 보호에 관한 법률",
+          "article": "제38조 제5항",
+          "text": "신용정보회사등은 제3항 및 제4항에 따른 처리결과를 7일 이내에 해당 신용정보주체에게 알려야 하며, 해당 신용정보주체는 처리결과에 이의가 있으면 대통령령으로 정하는 바에 따라 금융위원회에 그 시정을 요청할 수 있다. …",
+          "url": "https://www.law.go.kr"
+        },
+        {
+          "law": "신용정보의 이용 및 보호에 관한 법률",
+          "article": "제20조의2 제2항",
+          "text": "「개인정보 보호법」 제21조제1항에도 불구하고 신용정보제공ㆍ이용자는 금융거래 등 상거래관계가 종료된 날부터 최장 5년 이내(해당 기간 이전에 정보 수집ㆍ제공 등의 목적이 달성된 경우에는 그 목적이 달성된 날부터 3개월 이내)에 해당 신용정보주체의 개인신용정보를 관리대상에서 삭제하여야 한다. 다만, 다음 각 호의 경우에는 그러하지 아니하다. …",
+          "url": "https://www.law.go.kr"
+        }
+      ],
+      "action": {
+        "label": "금감원에 확인",
+        "phone": "1332"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "신용정보의 이용 및 보호에 관한 법률(법률 제21646호, 2026.8.13. 시행) 제38조 제2항·제3항·제5항 · 제20조의2 제2항 — 1차 원문 대조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-18",
+        "checkedBy": "self",
+        "note": "**근거 없이 형벌을 말하고 있었다.** '돈을 받으면 사기, 서류를 꾸미면 문서위조입니다' 는 죄명 단정인데 legalBasis 가 비어 있었고 source 도 없었다. 그 절을 내렸다.\n\n형법 제231조·제347조 제1항 원문은 ba_doc_fabrication 에 있어 붙일 수는 있었다. 그래도 붙이지 않은 이유는 **문장이 개별 사건의 죄명 판단**이기 때문이다 — ba_doc_fabrication 에서 '신청자도 공범' 을 '처벌될 수 있습니다' 로 낮춘 것과 같은 종류다. 조문을 달아 단정을 살리는 것보다 절을 내리는 쪽이 맞다.\n\n'법정 보존기간' 의 '법정' 도 내렸다. 신용정보법의 어느 조문인지 확인하지 못했다. 남긴 것은 손해(그 돈만 잃는다)와 창구였다.\n\n**그다음에 조문이 왔고, 그 조문이 겁보다 세다.** 제38조 제2항은 사실과 다른 기록을 **본인이 직접** 정정 청구할 수 있게 하고, 제3항은 지워지는 것이 「사실과 다르거나 확인할 수 없는」 것뿐임을 못박는다 — **브로커의 거짓말이 정확히 이 지점이다.** 제5항이 7일과 금융위원회 시정요청을, 제20조의2 제2항이 보유기간을 정한다.\n\n문장을 「겁을 주는」 것에서 「할 일을 주는」 것으로 바꿨다. 「돈을 받으면 사기, 서류를 꾸미면 문서위조입니다」는 그대로 뺀 채다 — 죄명은 개별 사건의 판단이다.\n\n**제20조의2 제2항의 「최장 5년」은 우리 문장에 쓰지 않는다.** 단서와 각 호가 많아 그 숫자만 떼면 틀린 안내가 된다. 조문은 인용에 그대로 두고 우리는 「법이 정해 두었어요」까지만 말한다."
+      }
+    },
+    {
+      "id": "ba_subsidy_broker",
+      "severity": "blue",
+      "phrase": "정부지원금 100% 받아 드립니다 / 합격 보장합니다",
+      "truth": "정부지원금은 브로커 없이 직접 신청할 수 있어요. 대행료를 내면 그 돈만 잃어요. 어떤 지원금을 받을 수 있는지는 아래 창구에서 확인해 보세요.",
+      "triggers": [
+        "지원금 대행",
+        "보조금 대행",
+        "100% 합격",
+        "보조금 받아 준",
+        "지원금 받아 준"
+      ],
+      "tests": [
+        {
+          "text": "지원금 대행해 준다고 합니다",
+          "expected": true
+        },
+        {
+          "text": "100% 합격이라고 광고해요",
+          "expected": true
+        },
+        {
+          "text": "긴급복지 지원금을 받아 보려고요",
+          "expected": false
+        },
+        {
+          "text": "지원금 대행을 맡긴 적 없어요",
+          "expected": false
+        }
+      ],
+      "action": {
+        "label": "서민금융진흥원에 확인",
+        "phone": "1397"
+      },
+      "verification": {
+        "status": "needs_check",
+        "source": "조문 없음 — 아래 note 참조",
+        "checkedAt": "2026-08-18",
+        "checkedBy": "self",
+        "note": "**근거 없이 형벌을 말하고 있었다.** '부정수급액의 최대 5배 환수와 10년 이하 징역' 은 legalBasis 없이 화면에 있었다. 배수와 형량 둘 다 숫자라 더 위험하다 — 61번(78만 건·90%)과 같은 자리다.\n\n**이 항목은 영구히 verified 가 될 수 없다.** 「보조금 관리에 관한 법률」을 받아도 못 살린다 — 「정부지원금」이 무엇이냐에 따라 적용 법이 갈리기 때문이다. 국가 보조금은 보조금법, 고용장려금은 고용보험법, 소상공인 지원은 또 다른 법이다. **어느 지원금인지 모르는 채로 형량을 말할 수 없다.**\n\n그래서 이 문구는 **조문 없이 간다.** 남긴 것은 사실(직접 신청할 수 있다) · 손해(대행료만 잃는다) · 창구다. klac_132 와 같은 모양이다 — 찾았는데 없더라도 그건 답이다.\n\n창구는 서민금융진흥원(1397)으로 뒀다. 지원금 종류가 넓어 딱 맞는 한 곳이 없는데, 정책금융·서민지원 안내를 하는 곳이라 가장 가깝다."
+      }
+    },
+    {
+      "id": "ba_rehab_guarantee",
+      "severity": "blue",
+      "phrase": "회생 무조건 됩니다 / 탕감률 보장해 드립니다",
+      "truth": "[[인가]]는 법이 정한 요건이 모두 맞아야 나요. 누가 보장할 수 있는 것이 아니에요. 갚을 금액도 파산했을 때 돌아갔을 금액보다 적으면 안 되고, 갚는 기간도 법이 정해 두었어요.",
+      "triggers": [
+        "회생 무조건",
+        "탕감 보장",
+        "100% 인가"
+      ],
+      "tests": [
+        {
+          "text": "회생 무조건 된다고 해요",
+          "expected": true
+        },
+        {
+          "text": "탕감 보장해 준다고 합니다",
+          "expected": true
+        },
+        {
+          "text": "개인회생을 알아보고 있어요",
+          "expected": false
+        },
+        {
+          "text": "탕감 보장한다고 한 적 없어요",
+          "expected": false
+        }
+      ],
+      "action": {
+        "label": "무료 상담",
+        "phone": "132"
+      },
+      "legalBasis": {
+        "law": "채무자 회생 및 파산에 관한 법률",
+        "article": "제614조 제1항",
+        "text": "①법원은 개인회생채권자 또는 회생위원이 이의를 진술하지 아니하고 다음 각호의 요건이 모두 충족된 때에는 변제계획인가결정을 하여야 한다. 다만, 제610조제3항에 의한 변제계획안 수정명령에 불응한 경우에는 그러하지 아니하다. 1. 변제계획이 법률의 규정에 적합할 것 2. 변제계획이 공정하고 형평에 맞으며 수행가능할 것 3. 변제계획인가 전에 납부되어야 할 비용ㆍ수수료 그 밖의 금액이 납부되었을 것 4. 변제계획의 인가결정일을 기준일로 하여 평가한 개인회생채권에 대한 총변제액이 채무자가 파산하는 때에 배당받을 총액보다 적지 아니할 것. 다만, 채권자가 동의한 경우에는 그러하지 아니하다.",
+        "url": "https://www.law.go.kr"
+      },
+      "alsoBasis": [
+        {
+          "law": "채무자 회생 및 파산에 관한 법률",
+          "article": "제611조 제5항",
+          "text": "⑤변제계획에서 정하는 변제기간은 변제개시일부터 3년을 초과하여서는 아니된다. 다만, 제614조제1항제4호의 요건을 충족하기 위하여 필요한 경우 등 특별한 사정이 있는 때에는 변제개시일부터 5년을 초과하지 아니하는 범위에서 변제기간을 정할 수 있다.",
+          "url": "https://www.law.go.kr"
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "source": "채무자 회생 및 파산에 관한 법률(법률 제20577호, 2026.3.1. 시행) 제614조 제1항 · 제611조 제5항 — 1차 원문 대조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-18",
+        "checkedBy": "self",
+        "note": "조문 제목이 **「변제계획의 인부」**다. 「인가」가 아니다.\n\n조문이 문장을 바로잡아 주었다. 예전에는 「인가 여부와 갚을 금액은 **법원이 정합니다**」였는데, 제614조 제1항은 「법원은 … 요건이 모두 충족된 때에는 … **하여야 한다**」로 되어 있다. **정하는 것은 요건이지 법원의 재량이 아니다.** 브로커가 보장할 수 없는 이유가 거기 있다.\n\n제614조①4호가 총변제액을 파산 배당액과 견주게 하고, 제611조⑤가 기간을 3년(특별한 사정이 있으면 5년)으로 정한다. **3년·5년은 우리 문장에 쓰지 않는다** — 단서가 붙어 있어 숫자만 떼면 틀린 안내가 된다."
+      }
+    },
+    {
+      "id": "ba_limitation_waiver",
+      "severity": "orange",
+      "display": "inline",
+      "phrase": "시효 포기 각서를 써 주시면 됩니다",
+      "truth": "[[소멸시효]]의 이익은 미리 포기하지 못한다고 법에 쓰여 있어요. 늘리는 약속도 할 수 없어요. 아래 조문 그대로예요.",
+      "triggers": [
+        "시효 포기",
+        "시효를 포기",
+        "포기 각서",
+        "시효 연장",
+        "시효를 연장"
+      ],
+      "tests": [
+        {
+          "text": "시효 포기 각서를 쓰라고 합니다",
+          "expected": true
+        },
+        {
+          "text": "시효를 포기하는 서류에 서명하래요",
+          "expected": true
+        },
+        {
+          "text": "포기 각서를 써 달라고 하는데요",
+          "expected": true
+        },
+        {
+          "text": "시효 연장 약정을 맺자고 합니다",
+          "expected": true
+        },
+        {
+          "text": "시효를 연장할 수 있나요",
+          "expected": true
+        },
+        {
+          "text": "받는 것을 포기해야 하나 고민입니다",
+          "expected": false
+        },
+        {
+          "text": "기간을 연장해 달라고 부탁했어요",
+          "expected": false
+        },
+        {
+          "text": "계약 연장 이야기가 오갔습니다",
+          "expected": false
+        },
+        {
+          "text": "언제까지 요구할 수 있는지 알고 싶어요",
+          "expected": false
+        }
+      ],
+      "legalBasis": {
+        "law": "민법",
+        "article": "제184조 제1항",
+        "text": "①소멸시효의 이익은 미리 포기하지 못한다.",
+        "url": "https://www.law.go.kr"
+      },
+      "alsoBasis": [
+        {
+          "law": "민법",
+          "article": "제184조 제2항",
+          "text": "②소멸시효는 법률행위에 의하여 이를 배제, 연장 또는 가중할 수 없으나 이를 단축 또는 경감할 수 있다.",
+          "url": "https://www.law.go.kr"
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "source": "민법(법률 제21454호, 2026.3.17. 시행) 제184조 제1항·제2항",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-18",
+        "checkedBy": "self",
+        "note": "**조문이 정한 것까지만 말한다.** 「사기입니다」·「처벌받습니다」로 나가지 않는다 — 제184조에는 벌칙이 없다. 제1항이 미리 포기하는 것을, 제2항이 늘리는 것을 막는다. 그 두 문장이 전부다.\n\n**활용형을 나열했다.** 어간을 줄이면 「포기」 하나로 「받는 것을 포기해야 하나」가 걸린다(DECISIONS 81번). 음성 골든셋 넷이 그 자리를 지킨다.\n\n`inline` 이다. 사용자 본인이 형사처벌 대상이 되는 것이 아니라 **불리한 문서를 쓰게 되는 것**이라 멈춰 세우지 않는다(DECISIONS 81번의 stop 기준)."
+      }
+    }
+  ],
+  "brokerChecklists": [
+    {
+      "id": "bc_rehab_office",
+      "title": "개인회생·파산 사무실 판별 체크리스트",
+      "source": "서울회생법원 회생위원 제시 기준",
+      "items": [
+        "변호사·법무사와 직접 상담이 안 되고 '사무장'만 만나게 한다",
+        "전화 상담만 되고 사무실 방문이 안 된다",
+        "사무소 주소가 자주 바뀐다",
+        "수임료 낼 돈을 대출로 만들어 준다고 한다",
+        "소득을 실제보다 낮춰서 신고하자고 한다",
+        "위임장을 법원에 제출하지 않는다"
+      ],
+      "threshold": 2,
+      "thresholdMessage": "2개 이상 해당하면 진행을 멈추고 대한법률구조공단(132)에 확인하세요.",
+      "askThis": {
+        "question": "법무사님, 이 사건 신청 대리만 하시는 건가요, 전 절차를 대리하시나요?",
+        "why": "법무사는 개인회생·파산의 '신청의 대리'만 가능합니다(법무사법 제2조 제1항 제6호). 전 절차 포괄 대리는 변호사법 위반입니다(대법원 2022도4610).",
+        "verification": {
+          "status": "verified",
+          "checkedAt": "2026-08-15",
+          "checkedBy": "self"
+        }
+      },
+      "verification": {
+        "status": "verified",
+        "checkedAt": "2026-08-15",
+        "checkedBy": "self"
+      }
+    }
+  ],
+  "limitationRules": [
+    {
+      "id": "lm_start_point",
+      "kind": "start",
+      "label": "언제부터 세나요",
+      "note": "권리를 행사할 수 있는 때부터라고 법에 있어요. 그게 언제인지는 사정마다 달라서 저희가 정하지 않아요.",
+      "legalBasis": {
+        "law": "민법",
+        "article": "제166조",
+        "text": "①소멸시효는 권리를 행사할 수 있는 때로부터 진행한다. ②부작위를 목적으로 하는 채권의 소멸시효는 위반행위를 한 때로부터 진행한다.",
+        "url": "https://www.law.go.kr"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "민법(법률 제21454호, 2026.3.17. 시행) 제166조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-19",
+        "checkedBy": "self",
+        "note": "**계산기를 만들지 않는다.** 날짜를 받아 「완성일은 ○년 ○월 ○일」을 찍으면 그건 판정이다. 기산점이 사안마다 다르다고 조문이 그렇게 적어 두었다(DECISIONS 170번)."
+      }
+    },
+    {
+      "id": "lm_judgment_ten",
+      "kind": "branch",
+      "label": "[[판결]]이나 [[조정]]을 받아 두셨다면 10년이에요",
+      "note": "짧은 기간이 걸리던 것이라도 판결로 확정되면 10년이 된다고 법에 있어요. 재판상 화해나 조정처럼 판결과 같은 효력이 있는 것도 마찬가지예요. 다만 판결이 확정될 때 아직 갚을 날이 안 온 것에는 적용하지 않는다고 같은 조에 있어요.",
+      "legalBasis": {
+        "law": "민법",
+        "article": "제165조",
+        "text": "①판결에 의하여 확정된 채권은 단기의 소멸시효에 해당한 것이라도 그 소멸시효는 10년으로 한다. ②파산절차에 의하여 확정된 채권 및 재판상의 화해, 조정 기타 판결과 동일한 효력이 있는 것에 의하여 확정된 채권도 전항과 같다. ③전2항의 규정은 판결확정당시에 변제기가 도래하지 아니한 채권에 적용하지 아니한다.",
+        "url": "https://www.law.go.kr"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "민법(법률 제21454호, 2026.3.17. 시행) 제165조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-19",
+        "checkedBy": "self",
+        "note": "**3년짜리로 알고 포기하려는 분에게 결정적이다.** 이미 받아 둔 종이가 있으면 숫자가 통째로 바뀐다.\n\n제3항을 함께 낸다. 빼면 「무조건 10년」이 된다."
+      }
+    },
+    {
+      "id": "lm_shorter",
+      "kind": "branch",
+      "label": "헷갈리면 짧은 쪽으로 적어 두세요",
+      "note": "길게 잡으면 되돌릴 수 없고, 짧게 잡으면 일찍 움직일 뿐 손해가 없어요. 그래서 헷갈릴 때는 짧은 쪽 날짜를 적어 두시는 게 안전해요. 그게 정답이라는 뜻은 아니에요.",
+      "legalBasis": {
+        "law": "민법",
+        "article": "제162조",
+        "text": "①채권은 10년간 행사하지 아니하면 소멸시효가 완성한다. ②채권 및 소유권 이외의 재산권은 20년간 행사하지 아니하면 소멸시효가 완성한다.",
+        "url": "https://www.law.go.kr"
+      },
+      "verification": {
+        "status": "needs_check",
+        "source": "민법(법률 제21454호, 2026.3.17. 시행) 제162조 제1항 — 방향은 우리가 골랐다",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-19",
+        "checkedBy": "self",
+        "note": "**조문이 아니라 우리가 고른 방향이다.** 그래서 🟡 다.\n\n**틀리는 방향이 비대칭이라 고를 수 있었다.** 실제보다 길게 알면 권리가 사라지고 되돌릴 방법이 없다. 짧게 알면 일찍 움직일 뿐 권리는 그대로다. 손해가 작은 쪽을 알려 주는 것은 판정이 아니다(DECISIONS 168번).\n\n**「그게 정답이라는 뜻은 아니에요」를 같은 문장 안에 둔다.** 떼어 놓으면 앞말만 남는다.\n\n**「서두르세요」로 쓰지 않는다.** 서두르는 데는 돈이 든다. 「날짜를 짧은 쪽으로 적어 두세요」다."
+      }
+    },
+    {
+      "id": "lm_interrupt_three",
+      "kind": "interrupt",
+      "label": "멈추는 일이 셋 있어요",
+      "note": "법에 세 가지가 적혀 있어요 — 아래 조문에 그대로 나와요. 어떤 말이 승인인지는 다투어질 수 있어서 저희가 풀지 않아요. 멈추면 그동안 지난 기간은 세지 않고 멈춤 사유가 끝난 때부터 새로 센다고 같은 법에 있어요.",
+      "legalBasis": {
+        "law": "민법",
+        "article": "제168조",
+        "text": "소멸시효는 다음 각호의 사유로 인하여 중단된다. 1. 청구 2. 압류 또는 가압류, 가처분 3. 승인",
+        "url": "https://www.law.go.kr"
+      },
+      "alsoBasis": [
+        {
+          "law": "민법",
+          "article": "제178조",
+          "text": "①시효가 중단된 때에는 중단까지에 경과한 시효기간은 이를 산입하지 아니하고 중단사유가 종료한 때로부터 새로이 진행한다. ②재판상의 청구로 인하여 중단한 시효는 전항의 규정에 의하여 재판이 확정된 때로부터 새로이 진행한다.",
+          "url": "https://www.law.go.kr"
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "source": "민법(법률 제21454호, 2026.3.17. 시행) 제168조 · 제178조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-19",
+        "checkedBy": "self",
+        "note": "**낱말만 낸다.** 「승인이 뭔지」를 우리가 풀면 상대가 한 말이 승인인지를 우리가 판정하는 것이 된다.\n\n제178조 제1항은 좋은 소식이라 그대로 낸다 — 멈추면 처음부터 다시 센다.\n\n**우리 말에 낱말을 옮겨 적지 않았다.** 「가압류」·「가처분」은 용어집에 없고 풀이를 지어낼 수 없다. 조문 원문이 바로 아래 붙어 있어서 셋을 거기서 읽는다."
+      }
+    },
+    {
+      "id": "lm_certified_mail",
+      "kind": "interrupt",
+      "label": "내용증명(법에서는 「최고」라고 불러요)을 보내 두셨다면",
+      "note": "최고만으로는 6개월 안에 재판상의 청구 같은 것을 하지 않으면 멈춤 효력이 없다고 법에 있어요. 무엇을 해야 하는지는 아래 조문에 그대로 나와요. 소를 냈다가 취하되거나 받아들여지지 않은 경우에도 6개월 안에 다시 하면 처음 청구로 멈춘 것으로 본다고 같은 법에 있어요.",
+      "legalBasis": {
+        "law": "민법",
+        "article": "제174조",
+        "text": "최고는 6월내에 재판상의 청구, 파산절차참가, 화해를 위한 소환, 임의출석, 압류 또는 가압류, 가처분을 하지 아니하면 시효중단의 효력이 없다.",
+        "url": "https://www.law.go.kr"
+      },
+      "alsoBasis": [
+        {
+          "law": "민법",
+          "article": "제170조",
+          "text": "①재판상의 청구는 소송의 각하, 기각 또는 취하의 경우에는 시효중단의 효력이 없다. ②전항의 경우에 6월내에 재판상의 청구, 파산절차참가, 압류 또는 가압류, 가처분을 한 때에는 시효는 최초의 재판상 청구로 인하여 중단된 것으로 본다.",
+          "url": "https://www.law.go.kr"
+        }
+      ],
+      "verification": {
+        "status": "verified",
+        "source": "민법(법률 제21454호, 2026.3.17. 시행) 제174조 · 제170조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-19",
+        "checkedBy": "self",
+        "note": "**「내용증명을 보냈으니 안심」이 제일 비싼 오해다.** 우리 앱은 돈 받기·보증금·임금 셋에서 내용증명을 안내한다. 제174조가 그 셋 전부에 걸린다(DECISIONS 169번).\n\n**showIf 를 걸지 않는다.** 예전에는 「보낸 사람에게만」이었는데, 안 보낸 사람에게 겁을 주는 것보다 **보낸 사람이 안심한 채 6개월을 넘기는 것**이 훨씬 비싸다. 라벨이 조건절(「보내 두셨다면」)이라 안 보낸 분에게는 해당 없는 줄로 읽힌다.\n\n제170조 제1항을 함께 낸다 — 소를 냈다고 끝이 아니다."
+      }
+    },
+    {
+      "id": "lm_no_waiver",
+      "kind": "interrupt",
+      "label": "미리 포기한다고 적혀 있어도",
+      "note": "[[소멸시효]]의 이익은 미리 포기하지 못한다고 법에 있어요. 다만 법률행위로 줄이거나 가볍게 하는 것은 할 수 있다고 같은 조에 있어요.",
+      "legalBasis": {
+        "law": "민법",
+        "article": "제184조",
+        "text": "①소멸시효의 이익은 미리 포기하지 못한다. ②소멸시효는 법률행위에 의하여 이를 배제, 연장 또는 가중할 수 없으나 이를 단축 또는 경감할 수 있다.",
+        "url": "https://www.law.go.kr"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "민법(법률 제21454호, 2026.3.17. 시행) 제184조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-19",
+        "checkedBy": "self",
+        "note": "**제2항을 함께 낸다.** 제1항만 내면 「계약서에 뭐라 적혀 있든 소용없다」로 읽히는데 조문이 그렇게 말하지 않는다 — 배제·연장·가중은 안 되고 단축·경감은 된다."
+      }
+    }
+  ],
+  "limitRules": [
+    {
+      "id": "lr_loan_broker_fee",
+      "label": "대출 중개수수료",
+      "inputs": [
+        {
+          "field": "requestedAmount",
+          "label": "요구받은 금액"
+        }
+      ],
+      "alwaysIllegal": true,
+      "message": "대출을 중개해 주면서 받는 사람에게 돈을 받는 것은 금지되어 있어요. 이름이 수수료든 사례금이든 착수금이든 마찬가지예요.",
+      "legalBasis": {
+        "law": "대부업법",
+        "article": "제11조의2 제2항",
+        "text": "대부중개업자 및 대출모집인(이하 \"대부중개업자등\"이라 한다)과 불법사금융중개업자는 수수료, 사례금, 착수금 등 그 명칭이 무엇이든 대부중개와 관련하여 받는 대가(이하 \"중개수수료\"라 한다)를 대부를 받는 거래상대방으로부터 받아서는 아니 된다.",
+        "url": "https://www.law.go.kr"
+      },
+      "alsoBasis": [
+        {
+          "law": "대부업법",
+          "article": "제19조 제4항 제6호",
+          "text": "④ 다음 각 호의 어느 하나에 해당하는 자는 3년 이하의 징역 또는 3천만원 이하의 벌금에 처한다. 6. 제11조의2제1항 또는 제2항을 위반하여 대부중개를 하거나 중개수수료를 받은 자",
+          "url": "https://www.law.go.kr"
+        }
+      ],
+      "action": {
+        "label": "금감원에 신고",
+        "phone": "1332"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "대부업 등의 등록 및 금융이용자 보호에 관한 법률(법률 제21065호, 2026.1.2. 시행) 제11조의2 제2항 · 제19조 제4항 제6호 — 1차 원문 대조",
+        "sourceUrl": "https://www.law.go.kr",
+        "checkedAt": "2026-08-18",
+        "checkedBy": "self",
+        "note": "**상한 규칙이 아니라 금지 규칙이다.** `alwaysIllegal: true` 라 계산되는 상한이 없고, 그게 맞다. 제11조의2 제2항은 대출받는 사람에게서 중개수수료를 받는 것 **자체**를 금지한다 — 「명칭이 무엇이든」이라 수수료·사례금·착수금이 다 들어간다.\n\n**제3항의 5% 상한은 여기에 적지 않는다.** 그건 대부업자가 중개업자에게 주는 쪽이고, 우리 화면에 적으면 「얼마까지는 괜찮다」로 읽힌다. 이 규칙은 지금 어느 화면에도 안 걸려 있다(🔴 — limitRules 미표시)."
+      }
+    },
+    {
+      "id": "lr_brokerage_fee",
+      "label": "부동산 중개보수",
+      "inputs": [
+        {
+          "field": "transactionAmount",
+          "label": "거래금액"
+        },
+        {
+          "field": "dealType",
+          "label": "거래 유형"
+        },
+        {
+          "field": "requestedAmount",
+          "label": "요구받은 금액"
+        }
+      ],
+      "message": "정해진 상한을 넘겨 받는 것은 금지되어 있어요. 얼마가 상한인지는 시·도 조례와 국토교통부령이 정해요.",
+      "formula": {
+        "type": "tiered_with_cap",
+        "variants": {
+          "lease": [
+            {
+              "max": 50000000,
+              "rate": 0.005,
+              "cap": 200000
+            },
+            {
+              "max": 100000000,
+              "rate": 0.004,
+              "cap": 300000
+            },
+            {
+              "max": 600000000,
+              "rate": 0.003,
+              "cap": null
+            },
+            {
+              "max": 1200000000,
+              "rate": 0.004,
+              "cap": null
+            },
+            {
+              "max": 1500000000,
+              "rate": 0.005,
+              "cap": null
+            },
+            {
+              "max": null,
+              "rate": 0.006,
+              "cap": null
+            }
+          ],
+          "sale": [
+            {
+              "max": 50000000,
+              "rate": 0.006,
+              "cap": 250000
+            },
+            {
+              "max": 200000000,
+              "rate": 0.005,
+              "cap": 800000
+            },
+            {
+              "max": 900000000,
+              "rate": 0.004,
+              "cap": null
+            },
+            {
+              "max": 1200000000,
+              "rate": 0.005,
+              "cap": null
+            },
+            {
+              "max": 1500000000,
+              "rate": 0.006,
+              "cap": null
+            },
+            {
+              "max": null,
+              "rate": 0.007,
+              "cap": null
+            }
+          ]
+        },
+        "monthlyRentConversion": {
+          "note": "월세는 보증금 + (월차임 × 100). 합산액이 5천만원 미만이면 보증금 + (월차임 × 70)",
+          "multiplier": 100,
+          "fallbackMultiplier": 70,
+          "fallbackThreshold": 50000000
+        }
+      },
+      "legalBasis": {
+        "law": "공인중개사법",
+        "article": "제33조 제1항 제3호",
+        "text": "① 개업공인중개사등은 다음 각 호의 행위를 하여서는 아니된다. 3. 사례ㆍ증여 그 밖의 어떠한 명목으로도 제32조에 따른 보수 또는 실비를 초과하여 금품을 받는 행위",
+        "url": "https://www.law.go.kr"
+      },
+      "alsoBasis": [
+        {
+          "law": "공인중개사법",
+          "article": "제32조 제4항",
+          "text": "주택(부속토지를 포함한다. 이하 이 항에서 같다)의 중개에 대한 보수와 제2항에 따른 실비의 한도 등에 관하여 필요한 사항은 국토교통부령으로 정하는 범위 안에서 특별시ㆍ광역시ㆍ도 또는 특별자치도(이하 \"시ㆍ도\"라 한다)의 조례로 정하고, 주택 외의 중개대상물의 중개에 대한 보수는 국토교통부령으로 정한다.",
+          "url": "https://www.law.go.kr"
+        },
+        {
+          "law": "공인중개사법",
+          "article": "제49조 제1항 제10호",
+          "text": "①다음 각 호의 어느 하나에 해당하는 자는 1년 이하의 징역 또는 1천만원 이하의 벌금에 처한다. 10. 제33조제1항제1호부터 제4호까지의 규정을 위반한 자",
+          "url": "https://www.law.go.kr"
+        }
+      ],
+      "verification": {
+        "status": "needs_check",
+        "source": "서울시 부동산정보광장 / 한국공인중개사협회",
+        "sourceUrl": "https://land.seoul.go.kr/land/broker/brokerageCommission.do",
+        "checkedAt": "2026-08-18",
+        "checkedBy": "self",
+        "note": "**조문 원문 자리에 우리가 쓴 요약이 있었다.** 「…금품을 받는 행위는 금지행위입니다.」 — 법령 문장은 ~한다 체이고 이건 우리 말투다. 원문을 받아 제33조 제1항 제3호로 바로잡았다.\n\n**세 조문이 각각 다른 일을 한다.** 제33조①3호가 금지행위이고, 제49조①10호가 그 처벌이며, 제32조④는 상한을 **시·도 조례와 국토교통부령에 위임**한다.\n\n**그래서 상한 액수는 화면에 쓸 수 없다.** 조례도 부령도 우리에게 없다. message 를 「정해진 상한을 넘겨 받는 것은 금지되어 있어요」까지로 줄였다. formula 의 요율표는 2차 출처(서울시·협회)에서 온 것이라 needs_check 를 유지한다 — 이 규칙은 지금 어느 화면에도 안 걸려 있다(🔴)."
+      },
+      "tests": [
+        {
+          "input": {
+            "transactionAmount": 150000000,
+            "dealType": "lease",
+            "requestedAmount": 450000
+          },
+          "expected": {
+            "legalMax": 450000,
+            "verdict": "within"
+          }
+        },
+        {
+          "input": {
+            "transactionAmount": 30000000,
+            "dealType": "lease",
+            "requestedAmount": 250000
+          },
+          "expected": {
+            "legalMax": 150000,
+            "verdict": "over",
+            "excess": 100000
+          }
+        }
+      ]
+    },
+    {
+      "id": "lr_ccrs_fee",
+      "label": "채무조정 비용",
+      "inputs": [
+        {
+          "field": "requestedAmount",
+          "label": "요구받은 금액"
+        }
+      ],
+      "formula": {
+        "type": "fixed",
+        "amount": 50000
+      },
+      "message": "신용회복위원회 채무조정 신청비는 5만원입니다. 그 외 추가비용은 없습니다.",
+      "action": {
+        "label": "직접 신청하기",
+        "phone": "1600-5500"
+      },
+      "notice": {
+        "agency": "신용회복위원회",
+        "checkedAt": "2026-08-18",
+        "dateScope": "visited",
+        "dataset": "신용회복위원회 채무조정 안내"
+      },
+      "verification": {
+        "status": "verified",
+        "source": "신용회복위원회 공식 안내",
+        "sourceUrl": "https://www.ccrs.or.kr/cms/com/index.do?MENU_ID=470",
+        "checkedAt": "2026-08-18",
+        "checkedBy": "self",
+        "note": "**조문이 아닌 것이 legalBasis 에 들어 있었다.** law·article 이 null 인 채 text 에 '신용회복위원회 공식 안내' 가 있었고, 화면은 그걸 조문 원문처럼 인용부호 안에 그렸다. legalBasis 를 지우고 출처는 여기로 옮겼다.\n\n**5만원은 법령이 아니라 신복위 공지다.** 근거가 조문이 아니라는 사실 자체가 이 항목의 정보다 — klac_132 와 같다."
+      }
+    }
+  ]
+}
